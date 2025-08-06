@@ -92,8 +92,8 @@
     const audioContext = new (window.AudioContext || window.webkitAudioContext)({ sampleRate: 24000 });
     const audioStreamer = new AudioStreamer(audioContext);
     const mediaHandler = new MediaHandler();
-    const api = new GeminiAPI('ws://127.0.0.1:8080/ws'); //only for local development
-    // const api = new GeminiAPI('wss://optus-modem-assistant-backend-tm5jum3toa-uc.a.run.app/ws'); //Use for Cloud Run
+    // const api = new GeminiAPI('ws://127.0.0.1:8080/ws'); //only for local development
+    const api = new GeminiAPI('wss://optus-modem-assistant-backend-tm5jum3toa-uc.a.run.app/ws'); //Use for Cloud Run
 
     // --- DOM Elements ---
     const connectButton = document.getElementById('connectButton');
@@ -433,6 +433,24 @@
     // --- INITIALIZATION ---
     mediaHandler.initialize(document.getElementById('videoPreview'));
     setupUIForDevice();
+
+    function adjustLayout() {
+      const header = document.querySelector('.header-section');
+      const controls = document.querySelector('.controls');
+      const videoContainer = document.querySelector('.video-container');
+      const chatOutput = document.querySelector('.chat-output');
+
+      const headerHeight = header.offsetHeight;
+      const controlsHeight = controls.offsetHeight;
+
+      videoContainer.style.top = `${headerHeight}px`;
+      videoContainer.style.height = `calc(100vh - ${headerHeight + controlsHeight}px)`;
+      chatOutput.style.top = `${headerHeight}px`;
+      chatOutput.style.bottom = `${controlsHeight}px`;
+    }
+
+    window.addEventListener('load', adjustLayout);
+    window.addEventListener('resize', adjustLayout);
 
   </script>
 </body>

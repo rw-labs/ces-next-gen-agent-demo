@@ -52,8 +52,8 @@ export class AudioStreamer {
       this.audioQueue.push(audioBuffer);
       this.bufferedTime += audioBuffer.duration;
       
-      // Start playing if not already playing AND we have at least 200ms of audio
-      if (!this.isPlaying && this.bufferedTime >= 0.5) {
+      // Start playing if not already playing AND we have a larger buffer for mobile stability
+      if (!this.isPlaying && this.bufferedTime >= 1.0) {
         this.isPlaying = true;
         this.lastPlaybackTime = this.context.currentTime;
         this.playNextBuffer();

@@ -155,7 +155,7 @@ You assist customers with setting up their {brand_name} modem, troubleshooting t
             *   From the camera feed (images) understand what is on the modem screen.
             *   If the modem screen displays "No SIM inserted" guide the user through inserting the SIM using **1. Insert the nano SIM** from the {MODEM_SETUP_GUIDE}
                 *   Ensure the SIM card has the Gold side facing up when placing the SIM in the tray
-            *   If the modem screen blue signal bars and "YES OPTUS" at the top left:
+            *   If the modem screen has blue signal bars and "YES OPTUS" at the top left:
                 *   The modem is setup. 
                 *   Assist the user with the modem locaion using the **Modem Location or performance**
        
