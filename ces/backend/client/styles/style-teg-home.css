@@ -1,0 +1,207 @@
+/* Basic Resets and Body Styles */
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
+}
+
+/* Header Styles */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #002952; /* Dark blue color matching the sample */
+    border-bottom: 1px solid #002952; /* Match the border color */
+}
+
+.header-left .logo {
+    height: 30px; /* Adjust as needed */
+    filter: brightness(0) invert(1); /* Makes the logo white for contrast on dark background if it's black */
+}
+
+.header-center {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.search-bar {
+    display: flex;
+    border: 1px solid #ccc; /* Border around search bar */
+    border-radius: 20px;
+    overflow: hidden;
+    width: 600px; /* Adjust width as needed */
+    max-width: 100%;
+    background-color: #fff; /* White background for the search bar */
+}
+
+.search-bar input {
+    border: none;
+    padding: 10px 15px;
+    flex-grow: 1;
+    outline: none;
+    font-size: 16px;
+    color: #333;
+}
+
+.search-bar button {
+    background-color: #fff; /* Keep the search button white for contrast */
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-bar button svg {
+    color: #555; /* Search icon color */
+}
+
+.header-right {
+    display: flex;
+    gap: 10px;
+    align-items: center; /* Align items vertically */
+}
+
+.header-right button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 15px;
+    color: #fff; /* White text for buttons on dark header */
+}
+
+.header-right button svg {
+    color: #fff; /* White icons on dark header */
+}
+
+/* Specific styling for the "Sign In" button to match the example's appearance */
+.login-button {
+    border: 1px solid #fff; /* White border */
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: background-color 0.2s ease;
+}
+
+.login-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Navigation Bar Styles */
+.navbar {
+    background-color: #000;
+    padding: 10px 20px;
+}
+
+.nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 25px; /* Adjust spacing between nav items */
+    flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+}
+
+.nav-list li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 5px 0;
+    display: block;
+    font-weight: 500;
+    font-size: 15px;
+    white-space: nowrap; /* Prevent nav items from breaking into multiple lines */
+}
+
+.nav-list li a:hover {
+    color: #ccc;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #333;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 5px;
+    top: 100%; /* Position dropdown below the parent */
+    left: 0;
+}
+
+.dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 14px;
+}
+
+.dropdown-content a:hover {
+    background-color: #575757;
+    border-radius: 5px;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.arrow-down {
+    margin-left: 5px;
+    font-size: 10px;
+}
+
+/* Main Content - Poster Grid */
+.main-content {
+    padding: 20px;
+    max-width: 1200px; /* Limit content width */
+    margin: 0 auto;
+}
+
+.poster-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid */
+    gap: 20px;
+}
+
+.poster-item {
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+    color: #333;
+    transition: transform 0.2s ease-in-out;
+}
+
+.poster-item:hover {
+    transform: translateY(-5px);
+}
+
+.poster-item img {
+    width: 100%;
+    height: 400px; /* Fixed height for consistency */
+    object-fit: cover; /* Cover the area, cropping if necessary */
+    display: block;
+}
+
+.poster-title {
+    padding: 15px;
+    font-weight: 600;
+    font-size: 18px;
+    text-align: center;
+    min-height: 50px; /* Ensure consistent height for titles */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

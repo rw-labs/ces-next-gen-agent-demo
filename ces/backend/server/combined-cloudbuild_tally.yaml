@@ -1,0 +1,33 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '--no-cache', '-t', 'gcr.io/$PROJECT_ID/next-gen-tally-agent-backend-combined', '.']
+  dir: 'server'
+
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'gcr.io/$PROJECT_ID/next-gen-tally-agent-backend-combined']
+
+- name: 'gcr.io/cloud-builders/gcloud'
+  args:
+  - 'run'
+  - 'deploy'
+  - 'next-gen-tally-agent-backend-combined'
+  - '--image'
+  - 'gcr.io/$PROJECT_ID/next-gen-tally-agent-backend-combined'
+  - '--region'
+  - 'us-central1'
+  - '--platform'
+  - 'managed'
+  - '--allow-unauthenticated'
+  - '--port'
+  - '8080'
+  - '--port'
+  - '80'
+  # You need to use the --update-env-vars or --remove-env-vars to change
+  # - '--set-env-vars'
+  # - 'PROJECT_ID=${PROJECT_ID},LOG_LEVEL=INFO,USE_TTS=false,TTS_LOCATION=global'
+  - '--service-account'
+  - 'live-agent-backend@${PROJECT_ID}.iam.gserviceaccount.com'
+  - '--min-instances=1'
+
+images:
+- 'gcr.io/$PROJECT_ID/next-gen-tally-agent-backend-combined'

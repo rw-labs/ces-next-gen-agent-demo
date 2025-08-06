@@ -1,0 +1,724 @@
+[
+    {
+        "URL": "https://www.servicesaus.com.au/mobile-phones//samsung/galaxy-s25",
+        "Brand": "Samsung",
+        "Model": "Galaxy S25",
+        "Price Outright": "$1098.76",
+        "Price over 36 months": "$30.52 /month",
+        "Available Colours": [
+            "Icyblue",
+            "Navy",
+            "Silver Shadow",
+            "Mint"
+        ],
+        "Available Storage Capacity": [
+            "256GB",
+            "512GB"
+        ]
+    },
+    {
+        "URL": "https://www.servicesaus.com.au/mobile-phones//samsung/galaxy-a36",
+        "Brand": "Samsung",
+        "Model": "Galaxy A36 5G",
+        "Price Outright": "Not explicitly stated",
+        "Price over 36 months": "$15.25 /month",
+        "Available Colours": [
+            "Awesome Lavender"
+        ],
+        "Available Storage Capacity": [
+            "128GB"
+        ]
+    },
+    {
+        "URL": "https://www.servicesaus.com.au/mobile-phones//samsung/galaxy-a16-5g",
+        "Brand": "Samsung",
+        "Model": "Galaxy A16 5G",
+        "Price Outright": "Not explicitly stated",
+        "Price over 36 months": "$1.00 /month",
+        "Available Colours": [
+            "Blue Black"
+        ],
+        "Available Storage Capacity": [
+            "128GB"
+        ]
+    },
+    {
+        "URL": "https://www.servicesaus.com.au/mobile-phones//zte/a71-5g",
+        "Brand": "ZTE",
+        "Model": "A71",
+        "Price Outright": "Not explicitly stated",
+        "Price over 36 months": "$7.74 /month",
+        "Available Colours": [
+            "Grey"
+        ],
+        "Available Storage Capacity": [
+            "64GB"
+        ]
+    },
+    {
+        "URL": "https://www.servicesaus.com.au/mobile-phones//spacetalk/adventurer-2",
+        "Brand": "Spacetalk",
+        "Model": "Adventurer 2",
+        "Price Outright": "Not explicitly stated",
+        "Price over 36 months": "$9.68 /month",
+        "Available Colours": [
+            "Dusk"
+        ],
+        "Available Storage Capacity": [
+            "35mm (Note: This appears to be watch face size, not storage capacity)"
+        ]
+    },
+    {
+        "URL": "https://www.servicesaus.com.au/mobile-phones//google/pixel-9a",
+        "Brand": "Google",
+        "Model": "Pixel 9a",
+        "Price Outright": "Not explicitly stated",
+        "Price over 36 months": "$23.58 /month",
+        "Available Colours": [
+            "Iris",
+            "Obsidian",
+            "Porcelain"
+        ],
+        "Available Storage Capacity": [
+            "128GB",
+            "256GB"
+        ]
+    },
+    {
+        "URL": "https://www.servicesaus.com.au/mobile-phones//google/pixel-9-pro-xl",
+        "Brand": "Google",
+        "Model": "Pixel 9 Pro XL",
+        "Price Outright": "$1,998.72",
+        "Price over 36 months": "$33.28 /month",
+        "Available Colours": [
+            "Porcelain",
+            "Obsidian",
+            "Hazel",
+            "Rose Quartz"
+        ],
+        "Available Storage Capacity": [
+            "128GB",
+            "256GB",
+            "512GB",
+            "1TB"
+        ]
+    },
+    {
+        "URL": "https://www.servicesaus.com.au/mobile-phones//motorola/g55-5g",
+        "Brand": "Motorola",
+        "Model": "moto g55 5G",
+        "Price Outright": "$298.80",
+        "Price over 36 months": "$1.00 /month",
+        "Available Colours": [
+            "Forest Grey"
+        ],
+        "Available Storage Capacity": [
+            "128GB"
+        ]
+    },
+    {
+        "URL": "https://www.servicesaus.com.au/mobile-phones//samsung/galaxy-fold4",
+        "Brand": "Samsung",
+        "Model": "Galaxy Z Fold4",
+        "Price Outright": "Not explicitly stated",
+        "Price over 36 months": "$74.96 /month",
+        "Available Colours": [
+            "Phantom Black"
+        ],
+        "Available Storage Capacity": [
+            "512GB"
+        ]
+    },
+    {
+        "URL": "https://www.optus.au/mobile/phones/nubia/focus-5g",
+        "Brand": "N/A",
+        "Model": "N/A",
+        "Price Outright": "N/A",
+        "Price over 36 months": "N/A",
+        "Available Colours": [
+            "N/A"
+        ],
+        "Available Storage Capacity": [
+            "N/A"
+        ]
+    },
+    {
+        "URL": "https://www.servicesaus.com.au/mobile-phones//samsung/galaxy-s23-ultra",
+        "Brand": "Samsung",
+        "Model": "Galaxy S23 Ultra",
+        "Price Outright": "Not explicitly stated",
+        "Price over 36 months": "$54.12 /month",
+        "Available Colours": [
+            "Phantom Black",
+            "Cream"
+        ],
+        "Available Storage Capacity": [
+            "256GB"
+        ]
+    },
+    {
+        "URL": "https://www.servicesaus.com.au/mobile-phones//google/pixel-9-pro-fold",
+        "Brand": "Google",
+        "Model": "Pixel 9 Pro Fold",
+        "Price Outright": "$2,698.56",
+        "Price over 36 months": "$52.72 /month",
+        "Available Colours": [
+            "Obsidian",
+            "Porcelain"
+        ],
+        "Available Storage Capacity": [
+            "256GB",
+            "512GB"
+        ]
+    },
+    {
+        "URL": "https://www.servicesaus.com.au/mobile-phones//google/pixel-8",
+        "Brand": "Google",
+        "Model": "Pixel 8",
+        "Price Outright": "Not explicitly stated",
+        "Price over 36 months": "$33.30 /month",
+        "Available Colours": [
+            "Obsidian",
+            "Rose"
+        ],
+        "Available Storage Capacity": [
+            "128GB"
+        ]
+    },
+    {
+        "URL": "https://www.servicesaus.com.au/mobile-phones//samsung/galaxy-flip4",
+        "Brand": "Samsung",
+        "Model": "Galaxy Z Flip4",
+        "Price Outright": "Not explicitly stated",
+        "Price over 36 months": "$41.62 /month",
+        "Available Colours": [
+            "Graphite"
+        ],
+        "Available Storage Capacity": [
+            "128GB"
+        ]
+    },
+    {
+        "URL": "https://www.servicesaus.com.au/mobile-phones//samsung/galaxy-s24-plus",
+        "Brand": "Samsung",
+        "Model": "Galaxy S24+",
+        "Price Outright": "Not explicitly stated",
+        "Price over 36 months": "$47.18 /month",
+        "Available Colours": [
+            "Marble Grey",
+            "Onyx Black",
+            "Cobalt Violet",
+            "Amber Yellow"
+        ],
+        "Available Storage Capacity": [
+            "256GB",
+            "512GB"
+        ]
+    },
+    {
+        "URL": "https://www.servicesaus.com.au/mobile-phones//samsung/galaxy-a33-5g",
+        "Brand": "Samsung",
+        "Model": "Galaxy A33",
+        "Price Outright": "Not explicitly stated",
+        "Price over 36 months": "$16.62 /month",
+        "Available Colours": [
+            "Awesome Black",
+            "Awesome Blue"
+        ],
+        "Available Storage Capacity": [
+            "128GB"
+        ]
+    },
+    {
+        "URL": "https://www.servicesaus.com.au/mobile-phones//samsung/galaxy-a56-5g",
+        "Brand": "Samsung",
+        "Model": "Galaxy A56 5G",
+        "Price Outright": "Not explicitly stated",
+        "Price over 36 months": "$19.40 /month",
+        "Available Colours": [
+            "Awesome Olive",
+            "Awesome Graphite"
+        ],
+        "Available Storage Capacity": [
+            "128GB"
+        ]
+    },
+    {
+        "URL": "https://www.servicesaus.com.au/mobile-phones//samsung/galaxy-s25-ultra",
+        "Brand": "Samsung",
+        "Model": "Galaxy S25 Ultra",
+        "Price Outright": "Not explicitly stated",
+        "Price over 36 months": "$48.56 /month",
+        "Available Colours": [
+            "Titanium Silverblue",
+            "Titanium Grey",
+            "Titanium Whitesilver",
+            "Titanium Black"
+        ],
+        "Available Storage Capacity": [
+            "256GB",
+            "512GB",
+            "1TB"
+        ]
+    },
+    {
+        "URL": "https://www.servicesaus.com.au/mobile-phones//samsung/galaxy-a54-5g",
+        "Brand": "Samsung",
+        "Model": "Galaxy A54 5G",
+        "Price Outright": "Not explicitly stated",
+        "Price over 36 months": "$19.40 /month",
+        "Available Colours": [
+            "Awesome Graphite"
+        ],
+        "Available Storage Capacity": [
+            "128GB"
+        ]
+    },
+    {
+        "URL": "https://www.servicesaus.com.au/mobile-phones//samsung/galaxy-flip6",
+        "Brand": "Samsung",
+        "Model": "Galaxy Z Flip6",
+        "Price Outright": "$1798.56",
+        "Price over 36 months": "$49.96 /month",
+        "Available Colours": [
+            "Blue",
+            "Yellow",
+            "Mint",
+            "Silver Shadow"
+        ],
+        "Available Storage Capacity": [
+            "256GB",
+            "512GB"
+        ]
+    },
+    {
+        "URL": "https://www.servicesaus.com.au/mobile-phones//samsung/galaxy-a34-5g",
+        "Brand": "Samsung",
+        "Model": "Galaxy A34 5G",
+        "Price Outright": "$598.32",
+        "Price over 36 months": "$16.62 /month",
+        "Available Colours": [
+            "Awesome Lime",
+            "Awesome Graphite"
+        ],
+        "Available Storage Capacity": [
+            "128GB"
+        ]
+    },
+    {
+        "URL": "https://www.servicesaus.com.au/mobile-phones//samsung/galaxy-a15-5g",
+        "Brand": "Samsung",
+        "Model": "Galaxy A15 5G",
+        "Price Outright": "$348.48",
+        "Price over 36 months": "$9.68 /month",
+        "Available Colours": [
+            "Blue Black"
+        ],
+        "Available Storage Capacity": [
+            "128GB"
+        ]
+    },
+    {
+        "URL": "https://www.servicesaus.com.au/mobile-phones//samsung/galaxy-s25-plus",
+        "Brand": "Samsung",
+        "Model": "Galaxy S25+",
+        "Price Outright": "$1698.48",
+        "Price over 36 months": "$47.18 /month",
+        "Available Colours": [
+            "Navy",
+            "Silver Shadow",
+            "Icyblue",
+            "Mint"
+        ],
+        "Available Storage Capacity": [
+            "256GB",
+            "512GB"
+        ]
+    },
+    {
+        "URL": "https://www.servicesaus.com.au/mobile-phones//oppo/oppo-a54-5g",
+        "Brand": "OPPO",
+        "Model": "OPPO A54 5G",
+        "Price Outright": "Out of Stock / Not available",
+        "Price over 36 months": "N/A",
+        "Available Colours": [
+            "Fluid Black"
+        ],
+        "Available Storage Capacity": [
+            "64GB"
+        ]
+    },
+    {
+        "URL": "https://www.servicesaus.com.au/mobile-phones//samsung/galaxy-fold6",
+        "Brand": "Samsung",
+        "Model": "Galaxy Z Fold6",
+        "Price Outright": "$2748.96",
+        "Price over 36 months": "$76.36 /month",
+        "Available Colours": [
+            "Silver Shadow",
+            "Navy",
+            "Pink"
+        ],
+        "Available Storage Capacity": [
+            "256GB",
+            "512GB",
+            "1TB"
+        ]
+    },
+    {
+        "URL": "https://www.servicesaus.com.au/mobile-phones//google/pixel-8a",
+        "Brand": "Google",
+        "Model": "Pixel 8a",
+        "Price Outright": "$798.48",
+        "Price over 36 months": "$22.18 /month",
+        "Available Colours": [
+            "Obsidian",
+            "Bay"
+        ],
+        "Available Storage Capacity": [
+            "128GB",
+            "256GB"
+        ]
+    },
+    {
+        "URL": "https://www.servicesaus.com.au/mobile-phones//samsung/galaxy-s24-fe",
+        "Brand": "Samsung",
+        "Model": "Galaxy S24 FE",
+        "Price Outright": "$1,098.72",
+        "Price over 36 months": "$15.26 /month",
+        "Available Colours": [
+            "Blue",
+            "Graphite",
+            "Mint"
+        ],
+        "Available Storage Capacity": [
+            "128GB",
+            "256GB"
+        ]
+    },
+    {
+        "URL": "https://www.servicesaus.com.au/mobile-phones//samsung/galaxy-s24",
+        "Brand": "Samsung",
+        "Model": "Galaxy S24",
+        "Price Outright": "$1248.48",
+        "Price over 36 months": "$34.68 /month",
+        "Available Colours": [
+            "Onyx Black",
+            "Amber Yellow",
+            "Marble Grey",
+            "Cobalt Violet"
+        ],
+        "Available Storage Capacity": [
+            "256GB",
+            "512GB"
+        ]
+    },
+    {
+        "URL": "https://www.servicesaus.com.au/mobile-phones//samsung/galaxy-flip5",
+        "Brand": "Samsung",
+        "Model": "Galaxy Z Flip5",
+        "Price Outright": "Not found",
+        "Price over 36 months": "Not found",
+        "Available Colours": [
+            "Not found"
+        ],
+        "Available Storage Capacity": [
+            "256GB",
+            "512GB"
+        ]
+    },
+    {
+        "URL": "https://www.servicesaus.com.au/mobile-phones//motorola/moto-g54",
+        "Brand": "Motorola",
+        "Model": "moto g54",
+        "Price Outright": "$278.64",
+        "Price over 36 months": "$1.00 /month",
+        "Available Colours": [
+            "Midnight Blue"
+        ],
+        "Available Storage Capacity": [
+            "128GB"
+        ]
+    },
+    {
+        "URL": "https://www.servicesaus.com.au/mobile-phones//samsung/galaxy-s22",
+        "Brand": "Samsung",
+        "Model": "Galaxy S22",
+        "Price Outright": "$1248.48",
+        "Price over 36 months": "$34.68 /month",
+        "Available Colours": [
+            "Phantom Black",
+            "Bora Purple"
+        ],
+        "Available Storage Capacity": [
+            "256GB"
+        ]
+    },
+    {
+        "URL": "https://www.servicesaus.com.au/mobile-phones//samsung/galaxy-s23-fe",
+        "Brand": "Samsung",
+        "Model": "Galaxy S23 FE",
+        "Price Outright": "$998.64",
+        "Price over 36 months": "$27.74 /month",
+        "Available Colours": [
+            "Mint",
+            "Cream",
+            "Purple",
+            "Graphite"
+        ],
+        "Available Storage Capacity": [
+            "128GB",
+            "256GB"
+        ]
+    },
+    {
+        "URL": "https://www.servicesaus.com.au/mobile-phones//google/pixel-7-pro",
+        "Brand": "Google",
+        "Model": "Pixel 7 Pro",
+        "Price Outright": "$498.96",
+        "Price over 36 months": "$8.30 /month",
+        "Available Colours": [
+            "Obsidian",
+            "Hazel"
+        ],
+        "Available Storage Capacity": [
+            "128GB",
+            "256GB"
+        ]
+    },
+    {
+        "URL": "https://www.servicesaus.com.au/mobile-phones//motorola/razr-50",
+        "Brand": "Motorola",
+        "Model": "razr 50",
+        "Price Outright": "$798.48",
+        "Price over 36 months": "$5.00 /month",
+        "Available Colours": [
+            "Koala Grey",
+            "Beach Sand"
+        ],
+        "Available Storage Capacity": [
+            "256GB"
+        ]
+    },
+    {
+        "URL": "https://www.servicesaus.com.au/mobile-phones//samsung/galaxy-a35-5g",
+        "Brand": "Samsung",
+        "Model": "Galaxy A35 5G",
+        "Price Outright": "$548.64",
+        "Price over 36 months": "$15.24 /month",
+        "Available Colours": [
+            "Awesome Navy"
+        ],
+        "Available Storage Capacity": [
+            "128GB"
+        ]
+    },
+    {
+        "URL": "https://www.servicesaus.com.au/mobile-phones//google/pixel-7",
+        "Brand": "Google",
+        "Model": "Pixel 7",
+        "Price Outright": "$1128.96",
+        "Price over 36 months": "$31.36 /month",
+        "Available Colours": [
+            "Obsidian",
+            "Lemongrass"
+        ],
+        "Available Storage Capacity": [
+            "256GB"
+        ]
+    },
+    {
+        "URL": "https://www.servicesaus.com.au/mobile-phones//samsung/galaxy-a53-5g",
+        "Brand": "Samsung",
+        "Model": "Galaxy A53 5G",
+        "Price Outright": "$698.40",
+        "Price over 36 months": "$19.40 /month",
+        "Available Colours": [
+            "Awesome Black",
+            "Awesome Blue"
+        ],
+        "Available Storage Capacity": [
+            "128GB"
+        ]
+    },
+    {
+        "URL": "https://www.servicesaus.com.au/mobile-phones//google/pixel-8-pro",
+        "Brand": "Google",
+        "Model": "Pixel 8 Pro",
+        "Price Outright": "$1698.48",
+        "Price over 36 months": "$47.18 /month",
+        "Available Colours": [
+            "Bay",
+            "Porcelain",
+            "Obsidian"
+        ],
+        "Available Storage Capacity": [
+            "128GB"
+        ]
+    },
+    {
+        "URL": "https://www.servicesaus.com.au/mobile-phones//samsung/galaxy-s24-ultra",
+        "Brand": "Samsung",
+        "Model": "Galaxy S24 Ultra",
+        "Price Outright": "Not explicitly stated",
+        "Price over 36 months": "$61.08 /month",
+        "Available Colours": [
+            "Titanium Black",
+            "Titanium Yellow",
+            "Titanium Grey",
+            "Titanium Violet"
+        ],
+        "Available Storage Capacity": [
+            "256GB",
+            "512GB",
+            "1TB"
+        ]
+    },
+    {
+        "URL": "https://www.servicesaus.com.au/mobile-phones//samsung/galaxy-a55-5g",
+        "Brand": "Samsung",
+        "Model": "Galaxy A55 5G",
+        "Price Outright": "Not explicitly stated",
+        "Price over 36 months": "$19.40 /month",
+        "Available Colours": [
+            "Awesome Lilac",
+            "Awesome Navy"
+        ],
+        "Available Storage Capacity": [
+            "128GB"
+        ]
+    },
+    {
+        "URL": "https://www.servicesaus.com.au/mobile-phones//google/pixel-9-pro",
+        "Brand": "Google",
+        "Model": "Pixel 9 Pro",
+        "Price Outright": "Out of Stock / Not available",
+        "Price over 36 months": "$47.18 /month",
+        "Available Colours": [
+            "Porcelain",
+            "Obsidian",
+            "Rose Quartz",
+            "Hazel"
+        ],
+        "Available Storage Capacity": [
+            "128GB",
+            "256GB"
+        ]
+    },
+    {
+        "URL": "https://www.servicesaus.com.au/mobile-phones//oppo/find-x5-lite",
+        "Brand": "Oppo",
+        "Model": "OPPO Find X5 Lite",
+        "Price Outright": "$798.48",
+        "Price over 36 months": "$19.40 /month",
+        "Available Colours": [
+            "Starry Black"
+        ],
+        "Available Storage Capacity": [
+            "256GB"
+        ]
+    },
+    {
+        "URL": "https://www.servicesaus.com.au/mobile-phones//samsung/galaxy-s25-edge",
+        "Brand": "Samsung",
+        "Model": "Galaxy S25 Edge",
+        "Price Outright": "Not explicitly stated",
+        "Price over 36 months": "$51.36 /month",
+        "Available Colours": [
+            "Titanium Silver",
+            "Titanium Jetblack"
+        ],
+        "Available Storage Capacity": [
+            "256GB",
+            "512GB"
+        ]
+    },
+    {
+        "URL": "https://www.servicesaus.com.au/mobile-phones//samsung/galaxy-s23",
+        "Brand": "Samsung",
+        "Model": "Galaxy S23",
+        "Price Outright": "Not explicitly stated",
+        "Price over 36 months": "$37.46 /month",
+        "Available Colours": [
+            "Lavender",
+            "Phantom Black",
+            "Green",
+            "Cream"
+        ],
+        "Available Storage Capacity": [
+            "128GB"
+        ]
+    },
+    {
+        "URL": "https://www.servicesaus.com.au/mobile-phones//samsung/galaxy-s23-plus",
+        "Brand": "Samsung",
+        "Model": "Galaxy S23+",
+        "Price Outright": "Not explicitly stated",
+        "Price over 36 months": "$45.80 /month",
+        "Available Colours": [
+            "Green",
+            "Lavender",
+            "Cream"
+        ],
+        "Available Storage Capacity": [
+            "256GB"
+        ]
+    },
+    {
+        "URL": "https://www.servicesaus.com.au/mobile-phones//samsung/galaxy-a14-5g",
+        "Brand": "Samsung",
+        "Model": "Galaxy A14 5G",
+        "Price Outright": "Out of Stock / Not available",
+        "Price over 36 months": "$10.52 /month",
+        "Available Colours": [
+            "Black"
+        ],
+        "Available Storage Capacity": [
+            "128GB"
+        ]
+    },
+    {
+        "URL": "https://www.servicesaus.com.au/mobile-phones//samsung/galaxy-s21-fe",
+        "Brand": "Samsung",
+        "Model": "Galaxy S21 FE 5G",
+        "Price Outright": "N/A",
+        "Price over 36 months": "N/A",
+        "Available Colours": [
+            "N/A"
+        ],
+        "Available Storage Capacity": [
+            "256GB",
+            "128GB"
+        ]
+    },
+    {
+        "URL": "https://www.servicesaus.com.au/mobile-phones//google/pixel-7a",
+        "Brand": "Google",
+        "Model": "Pixel 7a",
+        "Price Outright": "Not explicitly stated",
+        "Price over 36 months": "$20.80 /month",
+        "Available Colours": [
+            "Charcoal"
+        ],
+        "Available Storage Capacity": [
+            "128GB"
+        ]
+    },
+    {
+        "URL": "https://www.servicesaus.com.au/mobile-phones//google/pixel-9",
+        "Brand": "Google",
+        "Model": "Pixel 9",
+        "Price Outright": "Not explicitly stated",
+        "Price over 36 months": "$37.46 /month",
+        "Available Colours": [
+            "Peony",
+            "Obsidian",
+            "Porcelain",
+            "Wintergreen"
+        ],
+        "Available Storage Capacity": [
+            "128GB",
+            "256GB"
+        ]
+    }
+]

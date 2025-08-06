@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Dyson - Shop Now</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        <style>
+            body {
+                font-family: 'Inter', sans-serif;
+                background-color: #f7f7f7;
+            }
+        </style>
+    </head>
+    <body class="min-h-screen flex flex-col">
+
+    <!-- Header Section -->
+    <header class="bg-black py-4 header-shadow">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Top row of header -->
+            <div class="flex items-center justify-between mb-2">
+                <a href="#" class="text-2xl font-bold text-white">dyson</a>
+                <nav class="hidden md:flex space-x-6 text-sm text-white">
+                    <a href="#" class="hover:text-gray-300">For business</a>
+                    <a href="#" class="hover:text-gray-300">Find a store</a>
+                    <a href="#" class="hover:text-gray-300">Dyson Outlet</a>
+                    <a href="#" class="hover:text-gray-300">Register machine</a>
+                    <a href="#" class="hover:text-gray-300">Contact us</a>
+                </nav>
+            </div>
+
+            <!-- Bottom row of header -->
+            <div class="flex items-center justify-between">
+                <nav class="hidden md:flex space-x-6 text-sm text-white">
+                    <a href="#" class="hover:text-gray-300">Trade-in offer</a>
+                    <a href="#" class="hover:text-gray-300">Vacuum & wet cleaners</a>
+                    <a href="#" class="hover:text-gray-300">Hair care</a>
+                    <a href="#" class="hover:text-gray-300">Air purifier fans</a>
+                    <a href="#" class="hover:text-gray-300">Headphones</a>
+                    <a href="#" class="hover:text-gray-300">Lighting</a>
+                    <a href="#" class="hover:text-gray-300">Support</a>
+                    <a href="#" class="hover:text-gray-300">Best sellers</a>
+                </nav>
+                <div class="flex items-center space-x-4">
+                    <!-- Search bar with icon -->
+                    <div class="relative flex items-center bg-gray-800 rounded-full px-4 py-2">
+                        <svg class="w-5 h-5 text-gray-300 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        <input type="text" placeholder="Search products and parts" class="bg-transparent outline-none text-white placeholder-gray-400 text-sm w-40 md:w-auto">
+                    </div>
+                    <!-- Shopping Cart Icon -->
+                    <svg class="w-6 h-6 text-white cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content - Comparison Section -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <h1 class="text-3xl md:text-4xl font-semibold mb-2">Compare Dyson technology</h1>
+        <p class="text-gray-600 mb-8">Meet our hair dryer range and choose the right machine for you.</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Column Headers / Product Cards -->
+            <div class="bg-white rounded-lg p-6 text-center card-shadow flex flex-col items-center">
+                <img src="assets/supersonic_r.png" alt="Dyson Supersonic R Hair Dryer" class="w-32 h-auto mb-4">
+                <h2 class="text-lg font-semibold mb-2">supersonic r</h2>
+                <p class="text-sm text-gray-700 mb-4">Our most powerful, yet lightest hair dryer.</p>
+            </div>
+
+            <div class="bg-white rounded-lg p-6 text-center card-shadow flex flex-col items-center">
+                <img src="assets/supersonic-nural.png" alt="Dyson Supersonic Nural Hair Dryer" class="w-32 h-auto mb-4">
+                <h2 class="text-lg font-semibold mb-2">supersonic nural</h2>
+                <p class="text-sm text-gray-700 mb-4">Fast, intelligent drying. Scalp health protection.</p>
+            </div>
+
+            <div class="bg-white rounded-lg p-6 text-center card-shadow flex flex-col items-center">
+                <img src="assets/supersonic.png" alt="Dyson Supersonic Hair Dryer" class="w-32 h-auto mb-4">
+                <h2 class="text-lg font-semibold mb-2">supersonic</h2>
+                <p class="text-sm text-gray-700 mb-4">Fast drying with no extreme heat</p>
+            </div>
+        </div>
+
+        <!-- Comparison Table Body -->
+        <div class="mt-8 bg-white rounded-lg card-shadow overflow-hidden">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-x-6 py-4 px-6 border-b border-gray-200 bg-gray-50 text-sm font-medium text-gray-600">
+                <div class="md:col-span-1">Engineered for</div>
+                <div class="md:col-span-1 hidden md:block">Salon like results at home</div>
+                <div class="md:col-span-1 hidden md:block">Scalp health and sensitive users</div>
+                <div class="md:col-span-1 hidden md:block">Quick and fuss-free drying</div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-x-6 py-4 px-6 border-b border-gray-200 text-sm">
+                <div class="md:col-span-1 font-medium">Weight</div>
+                <div class="md:col-span-1">325g</div>
+                <div class="md:col-span-1">660g</div>
+                <div class="md:col-span-1">660g</div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-x-6 py-4 px-6 border-b border-gray-200 text-sm">
+                <div class="md:col-span-1 font-medium">Streamlined flow heater</div>
+                <div class="md:col-span-1"><svg class="inline w-5 h-5 text-green-600" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div>
+                <div class="md:col-span-1">-</div>
+                <div class="md:col-span-1">-</div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-x-6 py-4 px-6 border-b border-gray-200 text-sm">
+                <div class="md:col-span-1 font-medium">Ergonomically designed</div>
+                <div class="md:col-span-1"><svg class="inline w-5 h-5 text-green-600" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div>
+                <div class="md:col-span-1">-</div>
+                <div class="md:col-span-1">-</div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-x-6 py-4 px-6 border-b border-gray-200 text-sm">
+                <div class="md:col-span-1 font-medium">Scalp protect mode</div>
+                <div class="md:col-span-1">-</div>
+                <div class="md:col-span-1"><svg class="inline w-5 h-5 text-green-600" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div>
+                <div class="md:col-span-1">-</div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-x-6 py-4 px-6 border-b border-gray-200 text-sm">
+                <div class="md:col-span-1 font-medium">Attachment learning</div>
+                <div class="md:col-span-1"><svg class="inline w-5 h-5 text-green-600" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div>
+                <div class="md:col-span-1"><svg class="inline w-5 h-5 text-green-600" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div>
+                <div class="md:col-span-1">-</div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-x-6 py-4 px-6 text-sm">
+                <div class="md:col-span-1 font-medium">Pause detect</div>
+                <div class="md:col-span-1">-</div>
+                <div class="md:col-span-1"><svg class="inline w-5 h-5 text-green-600" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div>
+                <div class="md:col-span-1">-</div>
+            </div>
+        </div>
+
+        <!-- Shop Now Buttons -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+            <div class="flex justify-center">
+                <button class="bg-green-600 hover:bg-green-700 text-white font-medium py-3 px-8 rounded-full transition duration-300 ease-in-out shadow-lg">Shop now</button>
+            </div>
+            <div class="flex justify-center">
+                <button class="bg-green-600 hover:bg-green-700 text-white font-medium py-3 px-8 rounded-full transition duration-300 ease-in-out shadow-lg">Shop now</button>
+            </div>
+            <div class="flex justify-center">
+                <button class="bg-green-600 hover:bg-green-700 text-white font-medium py-3 px-8 rounded-full transition duration-300 ease-in-out shadow-lg">Shop now</button>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>

@@ -1,0 +1,102 @@
+[
+    {
+        "Artist": "Drake",
+        "Time": "14 July 2025",
+        "Country": "Australia",
+        "City": "Hunter Valley",
+        "Venue": "QIRKZ in The Hunter",
+        "Price starting from": "$89.90",
+        "Price Tiers": [
+            {
+                "Price": "$89.90",
+                "SeatLocation": "Section C, Row 16",
+                "View": "Average"
+            },
+            {
+                "Price": "$169.90",
+                "SeatLocation": "Section B, Row 15",
+                "View": "Great"
+            },
+            {
+                "Price": "$269.90",
+                "SeatLocation": "Section A, Row 14",
+                "View": "Excellent"
+            }
+        ]
+    },
+    {
+        "Artist": "James Blunt",
+        "Time": "25 Oct 2025",
+        "Country": "Australia",
+        "City": "Sydney",
+        "Venue": "Qudos Bank Arena",
+        "Price starting from": "$109.90",
+        "Price Tiers": [
+            {
+                "Price": "$109.90",
+                "SeatLocation": "Section C, Row 16",
+                "View": "Average"
+            },
+            {
+                "Price": "$189.90",
+                "SeatLocation": "Section B, Row 15",
+                "View": "Great"
+            },
+            {
+                "Price": "$289.90",
+                "SeatLocation": "Section A, Row 14",
+                "View": "Excellent"
+            }
+        ]
+    },
+    {
+        "Artist": "Harry Styles",
+        "Time": "20 Aug 2025",
+        "Country": "Australia",
+        "City": "Sydney",
+        "Venue": "Qudos Bank Arena",
+        "Price starting from": "$109.90",
+        "Price Tiers": [
+            {
+                "Price": "$95",
+                "SeatLocation": "Section C, Row 16",
+                "View": "Average"
+            },
+            {
+                "Price": "$185",
+                "SeatLocation": "Section B, Row 15",
+                "View": "Great"
+            },
+            {
+                "Price": "$285",
+                "SeatLocation": "Section A, Row 14",
+                "View": "Excellent"
+            }
+        ]
+    },
+    {
+        "Artist": "The Rubens",
+        "Time": "10 Aug 2025",
+        "Country": "Australia",
+        "City": "Sydney",
+        "Venue": "Accor Stadium",
+        "Price starting from": "$109.90",
+        "Price Tiers": [
+            {
+                "Price": "$95",
+                "SeatLocation": "Section C, Row 16",
+                "View": "Average"
+            },
+            {
+                "Price": "$185",
+                "SeatLocation": "Section B, Row 15",
+                "View": "Great"
+            },
+            {
+                "Price": "$285",
+                "SeatLocation": "Section A, Row 14",
+                "View": "Excellent"
+            }
+        ]
+    }
+]
