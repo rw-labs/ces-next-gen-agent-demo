@@ -20,6 +20,8 @@ steps:
   - 'us-central1'
   - '--platform'
   - 'managed'
+  - '--min'
+  - '1'
   - '--allow-unauthenticated'
   - '--port'
   - '8080'

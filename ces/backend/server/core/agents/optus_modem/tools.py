@@ -382,7 +382,7 @@ def request_visual_input(reason_for_request: str, tool_context: ToolContext) -> 
     return {
         "status": "visual_input_requested",
         "reason": reason_for_request,
-        "message_to_user": f"Okay, to help with '{reason_for_request}', could you please show it to me using your camera or by uploading an image?"
+        "message_to_user": f"Okay, to help with '{reason_for_request}', could you please show it to me using your camera?"
     }
 
 def affirmative() -> dict:

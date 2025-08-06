@@ -42,7 +42,7 @@ def create_optus_modem_agent(
         model_name: str = MODEL, # Use the global MODEL config
         name: str = "optus_modem_assistant",
         global_instructions: str = OptusModemPrompts.GLOBAL_PROMPT,
-        instruction: str = OptusModemPrompts.MODEM_SETUP_TEXT_ONLY,
+        instruction: str = OptusModemPrompts.OPTUS_MODEM_MAIN,
         tools_list: List[BaseTool] = None, # Allow overriding tools for testing
         sub_agents_list: List[Agent] = None
         ) -> Agent:
@@ -53,7 +53,6 @@ def create_optus_modem_agent(
             get_current_datetime_tool,
             request_visual_input,
             affirmative,
-            update_crm
     ]
     
     default_sub_agents = [] # No default sub-agents for Ollie in this design

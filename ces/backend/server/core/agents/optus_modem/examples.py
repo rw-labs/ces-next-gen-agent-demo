@@ -125,49 +125,55 @@ Absolutely! The Samsung Galaxy S24 Ultra is a real powerhouse. Besides the 200MP
 """
 
     VISUAL_TROUBLESHOOTING = """
-IGNORE_WHEN_COPYING_START
-content_copy
-download
-Use code with caution.
-IGNORE_WHEN_COPYING_END
 <Example>
 [USER]:
-My phone screen looks weird, it has lines on it.
-
+I'm having trouble setting up my modem.
 
 [MODEL]:
-Oh, I'm sorry to hear that, CUSTOMER_FIRST_NAME. Lines on the screen can be concerning. To help me understand what's going on, would you be able to show me?
-
-print(request_visual_input(reason_for_request='to see the lines on your phone screen'))
-IGNORE_WHEN_COPYING_START
-content_copy
-download
-Use code with caution.
-Tool_code
-IGNORE_WHEN_COPYING_END
-{"status": "visual_input_requested", "reason": "to see the lines on your phone screen", "message_to_user": "Okay, to help with 'to see the lines on your phone screen', could you please show it to me using your camera or by uploading an image?"}
-IGNORE_WHEN_COPYING_START
-content_copy
-download
-Use code with caution.
-Tool_outputs
-IGNORE_WHEN_COPYING_END
-
-Okay, to help me see the lines on your phone screen, could you please show it to me using your camera or by uploading an image?
+Okay sure, I can help you with that CUSTOMER_FIRST_NAME. Are you looking to set it up for the first time, troubleshoot an issue, find the best locaion for it or something else?
 
 [USER]:
-(User sends an image of a phone screen with horizontal lines)
-Here, I've sent a picture.
+I'm not sure the best place to put it. 
 
 [MODEL]:
-Thank you for sending the picture, CUSTOMER_FIRST_NAME. I can see the horizontal lines on your screen. That does look unusual. This could sometimes be related to a loose display cable, a software glitch, or unfortunately, a hardware issue with the screen itself.
-Have you tried restarting your phone yet? Sometimes a simple restart can resolve temporary display glitches.
+Okay have you already downloaded the My Optus app on your phone? The help will help us find the best spot for your modem to get the strongest 5G signal. 
+Have you opened the app and gone through the "Find my 5G" section yet?
 
 [USER]:
-No, I haven't. Should I try that?
+No I don't want to that, I just want to get it setup.
 
 [MODEL]:
-Yes, please do. A restart is a good first troubleshooting step. Let me know if that makes any difference to the lines on the screen.
+Okay sure, to help me find the best location, could you please enable your camera by clicking on the Camera button and show me where you were planning on putting it?
+
+print(request_visual_input(reason_for_request='to see the location of the modem'))
+
+[USER]:
+(User shares their camera and video stream of the modem)
+
+[MODEL]:
+(MODEL checks the number of signal bars on the modem and the location of the modem)
+Thank you, I can see you have 4 bars of reception. For the best results, its recommended you position your modem 1 - 1.5m off the ground in a central location in your home and that your modem isn't blocked by any large or metal objects (e.g. a TV, speaker, microwave or fridge) or a stone or concrete wall.
+I can see your modem is currently behind the TV. Are you able to move it closer to the window?
+
+[USER]:
+Yes sure let me try that. One sec
+
+[MODEL]:
+Sure I'll wait while you move it. Let me know once you've moved it and we can check the location and signal again.
+
+[USER]:
+Okay I've moved it now 
+(user shares camera showing location of modem next to the window)
+
+[MODEL]:
+(MODEL checks the number of signal bars on the modem and the location of the modem)
+Thank you, I can see you now have 5 bars of reception so thats a great location and should give you the best performance. 
+
+[USER]:
+great thanks
+
+[MODEL]:
+You're very welcome, CUSTOMER_FIRST_NAME! I'm glad I could help.
 </Example>
 """
     CLOSING_CONVERSATION = """
@@ -177,20 +183,17 @@ That's all the help I needed, thank you!
 
 [MODEL]:
 You're very welcome, CUSTOMER_FIRST_NAME! I'm glad I could assist you today. Feel free to reach out if you have more Android questions or need help with your BRAND_NAME services in the future. Have a great day!
-
-print(update_crm(customer_id='__CUSTOMER_FIRST_NAME__', details='Assisted with battery saver query and Pixel 8 Pro review. Customer satisfied.'))
-IGNORE_WHEN_COPYING_START
-content_copy
-download
-Use code with caution.
-Tool_code
-IGNORE_WHEN_COPYING_END
-{'status': 'success', 'message': 'CRM record updated.'}
-IGNORE_WHEN_COPYING_START
-content_copy
-download
-Use code with caution.
-Tool_outputs
-IGNORE_WHEN_COPYING_END
 </Example>
 """
+
+# print(update_crm(customer_id='__CUSTOMER_FIRST_NAME__', details='Assisted with battery saver query and Pixel 8 Pro review. Customer satisfied.'))
+# IGNORE_WHEN_COPYING_START
+# content_copy
+# download
+# Use code with caution.
+# Tool_code
+# IGNORE_WHEN_COPYING_END
+# {'status': 'success', 'message': 'CRM record updated.'}
+
+# {"status": "visual_input_requested", "reason": "o see the location of the modem", "message_to_user": "Okay, to help with 'to see the lines on your phone screen', could you please show it to me using your camera or by uploading an image?"}
+
