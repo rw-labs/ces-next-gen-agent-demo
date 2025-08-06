@@ -45,9 +45,23 @@
       <button id="micButton" class="action-button" disabled>
         <span class="material-symbols-outlined">mic</span>
       </button>
-      <button id="webcamButton" class="action-button" disabled>
+      <!-- <button id="webcamButton" class="action-button" disabled>
         <span class="material-symbols-outlined">videocam</span>
-      </button>
+      </button> -->
+      <div class="camera-selector">
+        <div style="display: flex; gap: 8px;">
+          <button id="cameraIconButton" class="action-button">
+            <span class="material-symbols-outlined">cameraswitch</span>
+          </button>
+          <button id="webcamButton" class="action-button">
+            <span class="material-symbols-outlined">videocam</span>
+          </button>
+        </div>
+        <div id="cameraDropdown" class="camera-dropdown hidden">
+          <select id="cameraSelect">
+          </select>
+        </div>
+      </div>      
       <button id="switchCameraButton" class="action-button hidden">
         <span class="material-symbols-outlined">flip_camera_ios</span>
       </button>
@@ -81,41 +95,95 @@
     // const api = new GeminiAPI('ws://127.0.0.1:8080/ws'); //only for local development
     const api = new GeminiAPI('wss://optus-modem-assistant-backend-tm5jum3toa-uc.a.run.app/ws'); //Use for Cloud Run
 
+    // --- DOM Elements ---
+    const connectButton = document.getElementById('connectButton');
+    const playButtonContainer = document.getElementById('playButtonContainer');
+    const mediaButtonsContainer = document.getElementById('mediaButtonsContainer');
+    const micButton = document.getElementById('micButton');
+    const stopButton = document.getElementById('stopButton');
+    let webcamButton = document.getElementById('webcamButton'); // May be replaced for mobile
+    const switchCameraButton = document.getElementById('switchCameraButton');
+    const screenButton = document.getElementById('screenButton');
+    const cameraSelector = document.querySelector('.camera-selector');
+    const cameraIconButton = document.getElementById('cameraIconButton');
+    const cameraDropdown = document.getElementById('cameraDropdown');
+    const cameraSelect = document.getElementById('cameraSelect');
+
     let isStarted = false;
     let isRecording = false;
     let isMuted = false;
     let currentTurn = 0;
     let lastAudioTurn = -1;
 
-    // Function to enable media controls
+    // --- UI LOGIC ---
+
+    function setupUIForDevice() {
+      if (isMobileDevice) {
+        cameraSelector.style.display = 'none'; // Hide the desktop camera selector
+        // Create a dedicated mobile webcam button to avoid conflicts
+        const mobileWebcamButton = document.createElement('button');
+        mobileWebcamButton.id = 'webcamButton-mobile';
+        mobileWebcamButton.className = 'action-button';
+        mobileWebcamButton.disabled = true;
+        mobileWebcamButton.innerHTML = '<span class="material-symbols-outlined">videocam</span>';
+        // Insert it before the (hidden on mobile) switch camera button for layout consistency
+        mediaButtonsContainer.insertBefore(mobileWebcamButton, switchCameraButton);
+        webcamButton = mobileWebcamButton; // Re-assign the global webcamButton to the new mobile one
+      } else {
+        switchCameraButton.style.display = 'none'; // Hide the mobile flip camera button
+      }
+      // Assign the single, unified click handler to whichever button is active
+      webcamButton.onclick = onWebcamButtonClick;
+    }
+
     function enableMediaControls() {
-      document.getElementById('micButton').disabled = false;
-      document.getElementById('webcamButton').disabled = false;
+      micButton.disabled = false;
+      webcamButton.disabled = false;
       if (!isMobileDevice) {
-        document.getElementById('screenButton').disabled = false;
+        screenButton.disabled = false;
+        cameraIconButton.disabled = false;
       }
     }
 
-    // Recording functions
+    function resetUIState() {
+      isStarted = false;
+      connectButton.disabled = false;
+      
+      mediaButtonsContainer.classList.add('hidden');
+      playButtonContainer.classList.remove('hidden');
+      
+      micButton.disabled = true;
+      micButton.classList.remove('active');
+      
+      webcamButton.disabled = true;
+      webcamButton.classList.remove('active');
+      
+      screenButton.disabled = true;
+      screenButton.classList.remove('active');
+      
+      switchCameraButton.classList.add('hidden');
+
+      if (!isMobileDevice) {
+        cameraIconButton.disabled = false;
+        cameraDropdown.classList.add('hidden');
+        cameraIconButton.classList.remove('hidden');
+      }
+    }
+
+    // --- CORE LOGIC ---
+
     async function startRecording() {
       try {
-        // If model is speaking, treat this as an interruption
         if (api.isSpeaking) {
-          audioStreamer.stop();  // Stop current playback and clear queue
+          audioStreamer.stop();
           api.isSpeaking = false;
         }
-
         await audioContext.resume();
         await audioRecorder.start();
         currentTurn++;
-        
-        audioRecorder.on('data', (base64Data) => {
-          api.sendAudioChunk(base64Data);
-        });
-
+        audioRecorder.on('data', (base64Data) => api.sendAudioChunk(base64Data));
         isRecording = true;
         isMuted = false;
-        const micButton = document.getElementById('micButton');
         micButton.classList.add('active');
       } catch (error) {
         console.error('Error starting recording:', error);
@@ -127,54 +195,34 @@
       audioRecorder.stop();
       isRecording = false;
       isMuted = false;
-      
       if (isStarted) {
         api.sendEndMessage();
       }
       api.isSpeaking = false;
     }
 
-    // Initialize media handler
-    mediaHandler.initialize(document.getElementById('videoPreview'));
+    // --- EVENT HANDLERS ---
 
-    // Show screen share button on non-mobile devices
-    if (!isMobileDevice) {
-      document.getElementById('screenButton').classList.remove('hidden');
-    }
-
-    // Connect button handler
-    document.getElementById('connectButton').onclick = async () => {
+    connectButton.onclick = async () => {
       try {
-        document.getElementById('connectButton').disabled = true;
+        connectButton.disabled = true;
         await audioContext.resume();
         
-        // On some mobile devices, using the microphone can route audio output
-        // to the earpiece instead of the main speaker. Playing a short, silent
-        // sound through the AudioContext can help ensure the audio session is
-        // configured for media playback, directing output to the speakers.
         const buffer = audioContext.createBuffer(1, 1, audioContext.sampleRate);
         const source = audioContext.createBufferSource();
         source.buffer = buffer;
         source.connect(audioContext.destination);
         source.start(0);
 
-        // Try to ensure WebSocket connection
-        try {
-          await api.ensureConnected();
-        } catch (error) {
-          throw new Error('Unable to connect to server');
-        }
+        await api.ensureConnected();
         
         isStarted = true;
-        document.getElementById('playButtonContainer').classList.add('hidden');
-        document.getElementById('mediaButtonsContainer').classList.remove('hidden');
+        playButtonContainer.classList.add('hidden');
+        mediaButtonsContainer.classList.remove('hidden');
         enableMediaControls();
-
-        // Start recording immediately
         await startRecording();
       } catch (error) {
         console.error('Error starting session:', error);
-        // Show connection error
         const existingError = document.querySelector('.connection-error');
         if (!existingError) {
           const errorElement = document.createElement('div');
@@ -186,48 +234,164 @@
       }
     };
 
-    // Set up API handleFrs
-    api.onReady = () => {
-      document.getElementById('connectButton').disabled = false;
-      // Remove any existing connection error message
-      const existingError = document.querySelector('.connection-error');
-      if (existingError) {
-        existingError.remove();
+    stopButton.onclick = async () => {
+      stopRecording();
+      mediaHandler.stopAll();
+      audioStreamer.stop();
+      api.isSpeaking = false;
+      resetUIState();
+      api.sendEndMessage();
+    };
+
+    micButton.onclick = () => {
+      isMuted = !isMuted;
+      if (isMuted) {
+        micButton.classList.remove('active');
+        audioRecorder.mute();
+        audioRecorder.off('data');
+      } else {
+        micButton.classList.add('active');
+        audioRecorder.unmute();
+        audioRecorder.on('data', (base64Data) => api.sendAudioChunk(base64Data));
       }
+    };
+
+    async function onWebcamButtonClick() {
+        if (mediaHandler.isWebcamActive) {
+            mediaHandler.stopAll();
+            this.classList.remove('active');
+            if (isMobileDevice) {
+                switchCameraButton.classList.add('hidden');
+            } else {
+                cameraIconButton.classList.remove('hidden');
+            }
+        } else {
+            if (mediaHandler.isScreenActive) {
+                mediaHandler.stopAll();
+                screenButton.classList.remove('active');
+            }
+            
+            let success;
+            if (isMobileDevice) {
+                success = await mediaHandler.initializeCamera();
+            } else {
+                const deviceId = cameraSelect.value;
+                if (!deviceId) {
+                    alert("Please select a camera first by clicking the icon next to the video button.");
+                    return;
+                }
+                success = await mediaHandler.startWebcam(deviceId);
+            }
+
+            if (success) {
+                this.classList.add('active');
+                if (isMobileDevice) {
+                    switchCameraButton.classList.remove('hidden');
+                } else {
+                    cameraIconButton.classList.add('hidden');
+                    cameraDropdown.classList.add('hidden');
+                }
+                mediaHandler.startFrameCapture((base64Image) => api.sendImage(base64Image));
+            }
+        }
+    }
+
+    switchCameraButton.onclick = async () => {
+      await mediaHandler.switchCamera();
+    };
+
+    screenButton.onclick = async () => {
+      if (mediaHandler.isScreenActive) {
+        mediaHandler.stopAll();
+        screenButton.classList.remove('active');
+      } else {
+        if (mediaHandler.isWebcamActive) {
+          mediaHandler.stopAll();
+          webcamButton.classList.remove('active');
+          if(isMobileDevice) switchCameraButton.classList.add('hidden');
+          else cameraIconButton.classList.remove('hidden');
+        }
+        
+        const success = await mediaHandler.startScreenShare();
+        if (success) {
+          screenButton.classList.add('active');
+          mediaHandler.startFrameCapture((base64Image) => api.sendImage(base64Image));
+        }
+      }
+    };
+
+    cameraIconButton.addEventListener('click', async (event) => {
+        event.stopPropagation();
+        if (cameraDropdown.classList.contains('hidden')) {
+            const cameras = await mediaHandler.getCameras();
+            cameraSelect.innerHTML = ""; 
+            if (cameras.length > 0) {
+                // Set the size of the select element to show all cameras
+                cameraSelect.size = cameras.length;
+                cameras.forEach(camera => {
+                    const option = document.createElement('option');
+                    option.value = camera.deviceId;
+                    option.text = camera.label || `Camera ${cameraSelect.options.length + 1}`;
+                    cameraSelect.appendChild(option);
+                });
+                cameraDropdown.classList.remove('hidden');
+            } else {
+                console.error("No cameras found.");
+            }
+        } else {
+            cameraDropdown.classList.add('hidden');
+        }
+    });
+
+    cameraSelect.addEventListener('change', async (event) => {
+        cameraDropdown.classList.add('hidden');
+        const deviceId = event.target.value;
+
+        if (mediaHandler.isWebcamActive) {
+            mediaHandler.stopAll();
+        }
+
+        if (mediaHandler.isScreenActive) {
+            mediaHandler.stopAll();
+            screenButton.classList.remove('active');
+        }
+
+        const success = await mediaHandler.startWebcam(deviceId);
+
+        if (success) {
+            webcamButton.classList.add('active');
+            if (!isMobileDevice) {
+                cameraIconButton.classList.add('hidden');
+            }
+            mediaHandler.startFrameCapture((base64Image) => api.sendImage(base64Image));
+        }
+    });
+
+    window.addEventListener('click', (event) => {
+        if (!cameraDropdown.contains(event.target) && event.target !== cameraIconButton) {
+            cameraDropdown.classList.add('hidden');
+        }
+    });
+
+    // --- API Event Handlers ---
+    api.onReady = () => {
+      connectButton.disabled = false;
+      const existingError = document.querySelector('.connection-error');
+      if (existingError) existingError.remove();
     };
 
     api.onError = (error) => {
       console.error('WebSocket error:', error);
-      if (error.error_type === 'quota_exceeded') {
-        // Show quota error in chat with special styling
-        const messageElement = document.createElement('p');
-        messageElement.className = 'error-message';
-        messageElement.textContent = '⚠️ ' + error.message + ' ' + error.action;
-        output.appendChild(messageElement);
-        output.scrollTop = output.scrollHeight;
-      } else if (error.error_type === 'websocket_error' || error.error_type === 'connection_error') {
-        // Show connection error at the top
-        const existingError = document.querySelector('.connection-error');
-        if (!existingError) {
-          const errorElement = document.createElement('div');
-          errorElement.className = 'connection-error';
-          errorElement.textContent = 'Cannot connect to server. Please check if the server is running.';
-          document.body.appendChild(errorElement);
-        }
-      }
+      // Handle different error types with appropriate UI feedback
       resetUIState();
-      if (isRecording) {
-        stopRecording();
-      }
+      if (isRecording) stopRecording();
       mediaHandler.stopAll();
     };
 
     api.onClose = () => {
       if (isStarted) {
         resetUIState();
-        if (isRecording) {
-          stopRecording();
-        }
+        if (isRecording) stopRecording();
         mediaHandler.stopAll();
       }
     };
@@ -251,157 +415,25 @@
       audioStreamer.complete();
     };
 
-    // Add function call and response handlers
-    api.onFunctionCall = (data) => {
-      const functionInfo = document.getElementById('functionInfo');
-      functionInfo.innerHTML = `Function: ${data.name}\nParameters: ${JSON.stringify(data.args, null, 2)}`;
-    };
-
-    api.onFunctionResponse = (data) => {
-      const functionInfo = document.getElementById('functionInfo');
-      functionInfo.innerHTML += `\nResponse: ${JSON.stringify(data, null, 2)}`;
-    };
-
-    // Button handlers
-    document.getElementById('micButton').onclick = () => {
-      isMuted = !isMuted;
-      const micButton = document.getElementById('micButton');
-      if (isMuted) {
-        micButton.classList.remove('active');
-        audioRecorder.mute();
-        audioRecorder.off('data');
-      } else {
-        micButton.classList.add('active');
-        audioRecorder.unmute();
-        audioRecorder.on('data', (base64Data) => {
-          api.sendAudioChunk(base64Data);
-        });
-      }
-    };
-
-    document.getElementById('stopButton').onclick = async () => {
-      stopRecording();
-      mediaHandler.stopAll();
-      audioStreamer.stop();  // Stop current playback and clear queue like interruption
-      api.isSpeaking = false;
-      
-      // Reset to initial state - only show play button
-      isStarted = false;
-      document.getElementById('connectButton').disabled = false;
-      document.getElementById('mediaButtonsContainer').classList.add('hidden');
-      document.getElementById('playButtonContainer').classList.remove('hidden');
-      
-      api.sendEndMessage();
-    };
-
-    document.getElementById('webcamButton').onclick = async () => {
-      if (mediaHandler.isWebcamActive) {
-        mediaHandler.stopAll();
-        document.getElementById('webcamButton').classList.remove('active');
-        document.getElementById('switchCameraButton').classList.add('hidden');
-      } else {
-        // First stop screen sharing if it's active
-        if (mediaHandler.isScreenActive) {
-          mediaHandler.stopAll();
-          document.getElementById('screenButton').classList.remove('active');
-        }
-        
-        const success = await mediaHandler.initializeCamera();
-        if (success) {
-          document.getElementById('webcamButton').classList.add('active');
-          if (isMobileDevice) {
-            document.getElementById('switchCameraButton').classList.remove('hidden');
-          }
-          mediaHandler.startFrameCapture((base64Image) => {
-            api.sendImage(base64Image);
-          });
-        }
-      }
-    };
-
-    document.getElementById('switchCameraButton').onclick = async () => {
-      await mediaHandler.switchCamera();
-    };
-
-    document.getElementById('screenButton').onclick = async () => {
-      if (mediaHandler.isScreenActive) {
-        mediaHandler.stopAll();
-        document.getElementById('screenButton').classList.remove('active');
-      } else {
-        // First stop webcam if it's active
-        if (mediaHandler.isWebcamActive) {
-          mediaHandler.stopAll();
-          document.getElementById('webcamButton').classList.remove('active');
-          document.getElementById('switchCameraButton').classList.add('hidden');
-        }
-        
-        const success = await mediaHandler.startScreenShare();
-        if (success) {
-          document.getElementById('screenButton').classList.add('active');
-          mediaHandler.startFrameCapture((base64Image) => {
-            api.sendImage(base64Image);
-          });
-        }
-      }
-    };
-
-    function logMessage(message) {
-      const messageElement = document.createElement('p');
-      
-      // Add specific styling based on message content
-      if (message.startsWith('Function:')) {
-        messageElement.className = 'function-name';
-      } else if (message.startsWith('Parameters:')) {
-        messageElement.className = 'function-params';
-      } else if (message.startsWith('API Response:')) {
-        messageElement.className = 'api-response';
-      } else if (message.startsWith('Gemini:')) {
-        messageElement.className = 'gemini-message';
-      } else if (message.startsWith('You:')) {
-        messageElement.className = 'user-message';
-      }
-      
-      messageElement.textContent = message;
-      output.appendChild(messageElement);
-      output.scrollTop = output.scrollHeight;
-    }
-
-    // Remove references to interruptButton and muteButton
-    function resetUIState() {
-      isStarted = false;
-      document.getElementById('connectButton').disabled = false;
-      
-      document.getElementById('mediaButtonsContainer').classList.add('hidden');
-      document.getElementById('playButtonContainer').classList.remove('hidden');
-      
-      // Reset all buttons
-      document.getElementById('micButton').disabled = true;
-      document.getElementById('micButton').classList.remove('active');
-      
-      document.getElementById('webcamButton').disabled = true;
-      document.getElementById('webcamButton').classList.remove('active');
-      document.getElementById('webcamButton').innerHTML = 
-        '<span class="material-symbols-outlined">videocam</span>';
-      
-      document.getElementById('screenButton').disabled = true;
-      document.getElementById('screenButton').classList.remove('active');
-      document.getElementById('screenButton').innerHTML = 
-        '<span class="material-symbols-outlined">present_to_all</span>';
-      
-      document.getElementById('switchCameraButton').classList.add('hidden');
-    }
-
-    // Update the text content handler to show messages
     api.onTextContent = (text) => {
       if (text.trim()) {
-        logMessage('Gemini: ' + text);
+        const messageElement = document.createElement('p');
+        messageElement.className = 'gemini-message';
+        messageElement.textContent = 'Gemini: ' + text;
+        output.appendChild(messageElement);
+        output.scrollTop = output.scrollHeight;
       }
     };
 
     api.onInterrupted = () => {
       api.isSpeaking = false;
-      audioStreamer.stop();  // Stop current playback and clear queue
+      audioStreamer.stop();
     };
+
+    // --- INITIALIZATION ---
+    mediaHandler.initialize(document.getElementById('videoPreview'));
+    setupUIForDevice();
+
   </script>
 </body>
 </html> 
