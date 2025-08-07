@@ -49,7 +49,7 @@ class OptusModemContext:
             "first_name": USER_CUSTOMER_FIRST_NAME,
             "last_name": USER_CUSTOMER_LAST_NAME,
             "is_optus_customer": True, # Can be updated based on interaction
-            "current_device": "Optus Ultra 5G modem", # Can be identified during conversation
+            "modem_type": "Optus Ultra 5G modem", # Can be identified during conversation
             "upgrade_interest": None, # e.g., "Looking for new phone"
             "preferred_contact_method": "chat",
         },

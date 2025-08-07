@@ -412,4 +412,11 @@ video {
 
 .endpoint-label {
   font-weight: 500;
-} 
+}
+
+.interrupted-message {
+  color: white;
+  font-style: italic;
+  padding: 4px 8px;
+  font-size: 0.8rem;
+}

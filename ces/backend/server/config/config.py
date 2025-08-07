@@ -150,6 +150,15 @@ if USE_TTS:
 
     RUN_CONFIG = RunConfig(
         response_modalities=["TEXT"],
+        realtime_input_config=types.RealtimeInputConfig(
+            automatic_activity_detection=types.AutomaticActivityDetection(
+                disabled=False,  # default
+                start_of_speech_sensitivity=types.StartSensitivity.START_SENSITIVITY_LOW,
+                end_of_speech_sensitivity=types.EndSensitivity.END_SENSITIVITY_LOW,
+                prefix_padding_ms=20,
+                silence_duration_ms=100,
+            )
+        ),
     )
 
     logger.info(f"TTS VERSION: {tts.__version__}")
@@ -177,6 +186,15 @@ else:
         proactivity=types.ProactivityConfig(proactive_audio=True), # ignores non-relevant conversations
         #input_audio_transcription={},
         output_audio_transcription={},
+        realtime_input_config=types.RealtimeInputConfig(
+            automatic_activity_detection=types.AutomaticActivityDetection(
+                disabled=False,  # default
+                start_of_speech_sensitivity=types.StartSensitivity.START_SENSITIVITY_LOW,
+                end_of_speech_sensitivity=types.EndSensitivity.END_SENSITIVITY_LOW,
+                prefix_padding_ms=500,
+                silence_duration_ms=100,
+            )
+        ),
     )
 
     logger.info(
