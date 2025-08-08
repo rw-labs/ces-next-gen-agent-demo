@@ -94,6 +94,7 @@ def get_agent_config(session_id: str):
         agent_config["app_name"] = "optus_modem_setup"
         agent_config["context"] = OptusModemContext.CUSTOMER_PROFILE
         agent_config["context"]["session_id"] = session_id # Add session_id to context
+        agent_config["context"]["video_status"] = "inactive" # Set initial video status
         agent_config["root_agent"] = create_optus_modem_agent ()
     # --- End Optus Modem Option ---
 

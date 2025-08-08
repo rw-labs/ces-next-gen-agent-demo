@@ -64,6 +64,9 @@ class SessionState:
         self.live_request_queue = LiveRequestQueue()
         self.events = None
 
+        # Video state tracking
+        self.video_active = False
+
         self.is_receiving_response: bool = False
         self.interrupted: bool = False
         # self.current_tool_execution: Optional[asyncio.Task] = None

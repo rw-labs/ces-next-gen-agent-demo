@@ -575,18 +575,29 @@ async def handle_client_messages(
                                     f"[Session: {session_id}] Received text message with no data."
                                 )
                     elif msg_type == "state":
-                        if msg_data and isinstance(msg_data, dict):
+                        if msg_data and isinstance(msg_data, dict) and "video_active" in msg_data:
+                            new_video_state = msg_data.get("video_active", False)
                             logger.info(
-                                f"[Session: {session_id}] Client -> Agent: Updating context with state: {msg_data}"
+                                f"[Session: {session_id}] Received video state update: {new_video_state}"
                             )
-                            # Update the session state's context
-                            session.context.update(msg_data)
-                            # Also update the agent's context directly
-                            if session.agent and hasattr(session.agent, 'context') and isinstance(session.agent.context, dict):
-                                session.agent.context.update(msg_data)
-                                logger.info(f"[Session: {session_id}] Agent context updated: {session.agent.context}")
+
+                            # Determine the video status based on state change
+                            if new_video_state and not session.video_active:
+                                video_status = "started"
+                            elif not new_video_state and session.video_active:
+                                video_status = "ended"
+                            elif new_video_state:
+                                video_status = "active"
                             else:
-                                logger.warning(f"[Session: {session_id}] Could not update agent context.")
+                                video_status = "inactive"
+
+                            # Update the session state for the next turn
+                            session.video_active = new_video_state
+
+                            # Update the context for the current turn
+                            context_update = {"video_status": video_status}
+                            session.context.update(context_update)
+                            logger.info(f"[Session: {session_id}] Agent context updated: {session.context}")
                         else:
                             logger.warning(
                                 f"[Session: {session_id}] Received state message with invalid data: {msg_data}"

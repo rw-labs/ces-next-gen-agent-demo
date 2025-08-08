@@ -55,12 +55,6 @@ class OptusModemContext:
         },
         "brand_name": "Optus",
         "assistant_name": "Modem Setup Assistant",
-        "allowed_search_domains": [ # For agent's awareness if it were to generate search queries
-            "support.google.com/android",
-            "*.android.com",
-            "*.gsmarena.com",
-            "optus.com.au/android-phones"
-        ],
         "current_datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         "session_id": None, # Will be populated at runtime
         "language": DEFAULT_LANGUAGE

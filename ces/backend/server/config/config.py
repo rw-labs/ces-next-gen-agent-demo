@@ -148,18 +148,18 @@ if USE_TTS:
             f"Voice `{VOICE}` only supported in `en-US` for TTS at this time."
         )
 
-    RUN_CONFIG = RunConfig(
-        response_modalities=["TEXT"],
-        realtime_input_config=types.RealtimeInputConfig(
-            automatic_activity_detection=types.AutomaticActivityDetection(
-                disabled=False,  # default
-                start_of_speech_sensitivity=types.StartSensitivity.START_SENSITIVITY_LOW,
-                end_of_speech_sensitivity=types.EndSensitivity.END_SENSITIVITY_LOW,
-                prefix_padding_ms=20,
-                silence_duration_ms=100,
-            )
-        ),
-    )
+    # RUN_CONFIG = RunConfig(
+    #     response_modalities=["TEXT"],
+    #     realtime_input_config=types.RealtimeInputConfig(
+    #         automatic_activity_detection=types.AutomaticActivityDetection(
+    #             disabled=False,  # default
+    #             start_of_speech_sensitivity=types.StartSensitivity.START_SENSITIVITY_LOW,
+    #             end_of_speech_sensitivity=types.EndSensitivity.END_SENSITIVITY_LOW,
+    #             prefix_padding_ms=500, # The required duration of detected speech before start-of-speech is committed. The lower this value the more sensitive the start-of-speech detection is and the shorter speech can be recognized. However, this also increases the probability of false positives.
+    #             silence_duration_ms=100,
+    #         )
+    #     ),
+    # )
 
     logger.info(f"TTS VERSION: {tts.__version__}")
     logger.info(
@@ -191,7 +191,7 @@ else:
                 disabled=False,  # default
                 start_of_speech_sensitivity=types.StartSensitivity.START_SENSITIVITY_LOW,
                 end_of_speech_sensitivity=types.EndSensitivity.END_SENSITIVITY_LOW,
-                prefix_padding_ms=500,
+                prefix_padding_ms=1000,
                 silence_duration_ms=100,
             )
         ),
