@@ -150,7 +150,7 @@ export class MediaHandler {
     const nextCameraIndex = (currentCameraIndex + 1) % cameras.length;
     const nextCamera = cameras[nextCameraIndex];
 
-    await this.stopAll(); // This also stops frame capture
+    this.stopAll(); // This also stops frame capture
 
     const success = await this.startWebcam(nextCamera.deviceId);
     if (success && this.frameCallback) {

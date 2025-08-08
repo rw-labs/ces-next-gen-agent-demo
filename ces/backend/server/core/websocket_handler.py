@@ -560,19 +560,36 @@ async def handle_client_messages(
                                 f"[Session: {session_id}] Received image message with no data."
                             )
                     elif msg_type == "text":
-                        if msg_data is not None:  # Allow empty strings
-                            logger.info(
-                                f"[Session: {session_id}] Client -> Agent: Sending text: '{msg_data[:50]}...'"
-                            )
-                            session.live_request_queue.send_content(
-                                google_types.Content(
-                                    role="user",
-                                    parts=[google_types.Part.from_text(text=msg_data)],
+                            if msg_data is not None:  # Allow empty strings
+                                logger.info(
+                                    f"[Session: {session_id}] Client -> Agent: Sending text: '{msg_data[:50]}...'"
                                 )
+                                session.live_request_queue.send_content(
+                                    google_types.Content(
+                                        role="user",
+                                        parts=[google_types.Part.from_text(text=msg_data)],
+                                    )
+                                )
+                            else:
+                                logger.warning(
+                                    f"[Session: {session_id}] Received text message with no data."
+                                )
+                    elif msg_type == "state":
+                        if msg_data and isinstance(msg_data, dict):
+                            logger.info(
+                                f"[Session: {session_id}] Client -> Agent: Updating context with state: {msg_data}"
                             )
+                            # Update the session state's context
+                            session.context.update(msg_data)
+                            # Also update the agent's context directly
+                            if session.agent and hasattr(session.agent, 'context') and isinstance(session.agent.context, dict):
+                                session.agent.context.update(msg_data)
+                                logger.info(f"[Session: {session_id}] Agent context updated: {session.agent.context}")
+                            else:
+                                logger.warning(f"[Session: {session_id}] Could not update agent context.")
                         else:
                             logger.warning(
-                                f"[Session: {session_id}] Received text message with no data."
+                                f"[Session: {session_id}] Received state message with invalid data: {msg_data}"
                             )
                     elif msg_type == "end":
                         logger.info(
@@ -683,7 +700,7 @@ async def handle_messages(
                     "⚠️ Quota exceeded. Please wait a moment and try again.",
                 )
                 handled = True
-                break  # Stop checking once handled
+                # break  # Stop checking once handled
 
         if not handled:
             logger.exception(

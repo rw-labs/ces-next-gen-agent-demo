@@ -45,6 +45,7 @@ body {
   align-items: center;
   justify-content: center;
   z-index: 100;
+  pointer-events: none; /* Allow clicks to pass through */
 }
 
 video {
@@ -55,6 +56,7 @@ video {
   object-fit: contain;
   background: #000;
   border: 1px solid rgba(255, 255, 255, 0.2);
+  pointer-events: auto; /* Make video itself clickable */
 }
 
 .chat-output {
@@ -412,6 +414,14 @@ video {
 
 .endpoint-label {
   font-weight: 500;
+}
+
+.system-message {
+  text-align: center;
+  color: #aaa; /* A dimmer color for system messages */
+  padding: 4px 8px;
+  font-size: 0.8rem;
+  font-style: italic;
 }
 
 .interrupted-message {

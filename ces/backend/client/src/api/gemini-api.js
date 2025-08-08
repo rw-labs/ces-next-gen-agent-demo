@@ -157,12 +157,20 @@ export class GeminiAPI {
             type: 'end'
         });
     }
-
     sendTextMessage(text) {
         console.log('Sending text message');
         this.sendMessage({
             type: 'text',
             data: text
+        });
+    }
+
+    //State update for when camera is turned off/on
+    sendStateUpdate(state) {
+        console.log('Sending state update');
+        this.sendMessage({
+            type: 'state',
+            data: state
         });
     }
 
