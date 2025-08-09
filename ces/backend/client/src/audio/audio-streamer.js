@@ -28,9 +28,11 @@ export class AudioStreamer {
       this.playbackTimeout = null;
       this.lastPlaybackTime = 0;
       this.bufferedTime = 0;
+      this.turnIsComplete = false;
     }
 
     addPCM16(chunk) {
+      this.turnIsComplete = false;
       // Convert incoming PCM16 data to float32
       const float32Array = new Float32Array(chunk.length / 2);
       const dataView = new DataView(chunk.buffer);
@@ -125,7 +127,9 @@ export class AudioStreamer {
           } else {
             this.isPlaying = false;
             this.bufferedTime = 0; // reset buffered time
-            this.onComplete();
+            if (this.turnIsComplete) {
+              this.onComplete();
+            }
           }
         };
 
@@ -181,15 +185,9 @@ export class AudioStreamer {
     }
 
     complete() {
-      // check if we have enough audio buffered to continue playing.
-      if (this.bufferedTime >= 0.2) {
-        return; // don't complete, we have enough buffered.
+      this.turnIsComplete = true;
+      if (!this.isPlaying && this.audioQueue.length === 0) {
+        this.onComplete();
       }
-
-      if (this.playbackTimeout) {
-        clearTimeout(this.playbackTimeout);
-        this.playbackTimeout = null;
-      }
-      this.onComplete();
     }
   }

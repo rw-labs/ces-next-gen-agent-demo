@@ -91,7 +91,6 @@ export class AudioRecorder extends EventEmitter3 {
       this.source?.disconnect();
       this.stream?.getTracks().forEach((track) => track.stop());
       this.stream = undefined;
-      this.recordingWorklet = undefined;
     };
     if (this.starting) {
       this.starting.then(handleStop);
@@ -101,16 +100,24 @@ export class AudioRecorder extends EventEmitter3 {
   }
 
   mute() {
+    console.log('[AudioRecorder] Mute called. isMuted:', this.isMuted);
     if (this.source && this.recordingWorklet && !this.isMuted) {
+      console.log('[AudioRecorder] Muting: Disconnecting source from worklet.');
       this.source.disconnect(this.recordingWorklet);
       this.isMuted = true;
+    } else {
+      console.log('[AudioRecorder] Mute skipped. Source:', this.source, 'Worklet:', this.recordingWorklet, 'isMuted:', this.isMuted);
     }
   }
 
   unmute() {
+    console.log('[AudioRecorder] Unmute called. isMuted:', this.isMuted);
     if (this.source && this.recordingWorklet && this.isMuted) {
+      console.log('[AudioRecorder] Unmuting: Connecting source to worklet.');
       this.source.connect(this.recordingWorklet);
       this.isMuted = false;
+    } else {
+      console.log('[AudioRecorder] Unmute skipped. Source:', this.source, 'Worklet:', this.recordingWorklet, 'isMuted:', this.isMuted);
     }
   }
 }

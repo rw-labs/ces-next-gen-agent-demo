@@ -426,7 +426,16 @@
       }
     };
 
+    let turnCompleteTimer = null;
     api.onAudioData = async (audioData) => {
+      clearTimeout(turnCompleteTimer);
+      turnCompleteTimer = setTimeout(() => {
+        console.log('Turn complete timer fired.');
+        if (api.onTurnComplete) {
+            api.onTurnComplete();
+        }
+      }, 500);
+
       try {
         if (!api.isSpeaking || lastAudioTurn !== currentTurn) {
           api.isSpeaking = true;
@@ -447,9 +456,17 @@
     };
 
     api.onTurnComplete = () => {
+      if (turnCompleteTimer) {
+        clearTimeout(turnCompleteTimer);
+        turnCompleteTimer = null;
+      }
+      console.log('onTurnComplete called. Resetting isSpeaking and incrementing turn.');
       api.isSpeaking = false;
       audioStreamer.complete();
+      currentTurn++;
+    };
 
+    audioStreamer.onComplete = () => {
       // --- Automatic Unmute after Playback ---
       // Unmute the microphone, but only if the user hasn't manually muted it.
       if (!isMuted) {
