@@ -432,17 +432,10 @@
           api.isSpeaking = true;
           lastAudioTurn = currentTurn;
 
-          // --- Interruption Grace Period ---
-          // Mute the microphone briefly when the agent starts speaking to prevent
-          // echo or small noises from causing an immediate, unwanted interruption.
+          // --- Automatic Mute on Playback ---
+          // Mute the microphone when the agent starts speaking to prevent
+          // feedback loops or unwanted interruptions.
           audioRecorder.mute();
-          setTimeout(() => {
-            // Unmute after the grace period, but only if the user hasn't
-            // manually muted the microphone in the meantime.
-            if (!isMuted) {
-              audioRecorder.unmute();
-            }
-          }, 500); // 1500ms grace period
         }
         const arrayBuffer = base64ToArrayBuffer(audioData);
         audioStreamer.addPCM16(new Uint8Array(arrayBuffer));
@@ -455,6 +448,12 @@
     api.onTurnComplete = () => {
       api.isSpeaking = false;
       audioStreamer.complete();
+
+      // --- Automatic Unmute after Playback ---
+      // Unmute the microphone, but only if the user hasn't manually muted it.
+      if (!isMuted) {
+        audioRecorder.unmute();
+      }
     };
 
     api.onTextContent = (text) => {
