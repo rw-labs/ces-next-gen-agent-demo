@@ -436,6 +436,7 @@
           // Mute the microphone when the agent starts speaking to prevent
           // feedback loops or unwanted interruptions.
           audioRecorder.mute();
+          audioRecorder.off('data');
         }
         const arrayBuffer = base64ToArrayBuffer(audioData);
         audioStreamer.addPCM16(new Uint8Array(arrayBuffer));
@@ -453,6 +454,7 @@
       // Unmute the microphone, but only if the user hasn't manually muted it.
       if (!isMuted) {
         audioRecorder.unmute();
+        audioRecorder.on('data', (base64Data) => api.sendAudioChunk(base64Data));
       }
     };
 
