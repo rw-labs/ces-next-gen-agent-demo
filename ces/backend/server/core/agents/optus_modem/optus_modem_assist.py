@@ -13,7 +13,7 @@ from .prompts import OptusModemPrompts # Will import OlliePrompts from prompts_R
 # from ...session_utils import SessionUtils # Example if session_utils is in a parent 'core' directory
 
 # Import all the tools defined 
-from .tools import ( # Will import tools from tools_R3.py
+from .tools import ( # Will import tools from tools.py
     greeting,
     get_current_datetime_tool,
     custom_web_search,
@@ -21,7 +21,8 @@ from .tools import ( # Will import tools from tools_R3.py
     search_live_optus_catalog, # Uses the local JSON search implementation
     request_visual_input,
     affirmative,
-    update_crm
+    update_crm,
+    confirm_visual_context
 )
 
 logger = logging.getLogger(__name__)
@@ -53,6 +54,7 @@ def create_optus_modem_agent(
             get_current_datetime_tool,
             request_visual_input,
             affirmative,
+            confirm_visual_context,
     ]
     
     default_sub_agents = [] # No default sub-agents for Ollie in this design
@@ -65,7 +67,6 @@ def create_optus_modem_agent(
     # from ...session_utils import SessionUtils # Make sure this path is correct
     # final_tools = SessionUtils.dedupe_lists(default_tools, tools_list or [])
     # final_sub_agents = SessionUtils.dedupe_lists(default_sub_agents, sub_agents_list or [])
-
 
     logger.info(f"Creating Optus Modem agent '{name}' with {len(final_tools)} tools using model '{model_name}'.")
     logger.info(f"Catalog search tool 'search_live_optus_catalog' is configured to use local JSON data.")

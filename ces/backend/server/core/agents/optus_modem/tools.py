@@ -239,12 +239,12 @@ def search_live_optus_catalog(search_term: str, tool_context: ToolContext) -> di
     It returns a JSON response with a list of matching devices.
     Example device structure in the returned JSON:
     {
-      "deviceName": "Samsung Galaxy S25", // Combined Brand and Model
-      "keyFeatures": ["Colours: color1, color2", "Storage: capacity1, capacity2"], // Derived from product data
-      "price": "$1398.96", // Typically outright price, or monthly if outright not available
+      "deviceName": "Samsung Galaxy S25", # Combined Brand and Model
+      "keyFeatures": ["Colours: color1, color2", "Storage: capacity1, capacity2"], # Derived from product data
+      "price": "$1398.96", # Typically outright price, or monthly if outright not available
       "productURL": "https://optus.com.au/samsung-s25",
-      "imageURL": null, // Not available from the current data source
-      "stockStatus": "In Stock" // Or "Out of Stock" / "Availability not specified" / "Check availability (possibly pre-order)"
+      "imageURL": null, # Not available from the current data source
+      "stockStatus": "In Stock" # Or "Out of Stock" / "Availability not specified" / "Check availability (possibly pre-order)"
     }
     """
     logger.info(f"Tool: search_live_optus_catalog (local JSON) called with search_term: '{search_term}'")
@@ -393,3 +393,25 @@ def update_crm(customer_id: str, details: str, tool_context: ToolContext) -> dic
     logger.info(f"Tool: update_crm called for customer '{customer_id}' with details: '{details}'")
     # In a real scenario, this would interact with a CRM system.
     return {"status": "success", "message": f"CRM record for '{customer_id}' updated."}
+
+def confirm_visual_context(tool_context: ToolContext) -> dict:
+    """
+    Checks if the user's video stream is currently active.
+    This tool MUST be called before making any statement about seeing the user's camera.
+    Returns a status indicating if the agent is allowed to proceed with a visual description.
+    """
+    logger.info("Tool: confirm_visual_context called")
+    video_status = "inactive"
+    
+    if hasattr(tool_context, 'state'):
+        state_obj = tool_context.state
+        if hasattr(state_obj, 'get') and callable(state_obj.get):
+            video_status = state_obj.get("video_status", "inactive")
+
+    if video_status in ["started", "active"]:
+        logger.info(f"Tool returned video_status as: {video_status}")
+        return {"status": "video_active", "message": "Confirmation successful. Video is active. You may now describe what you see."}
+
+    else:
+        logger.info(f"Tool returned video_status as: {video_status}")
+        return {"status": "video_inactive", "message": "Confirmation failed. Video is not active. You must ask the user to share their camera."}

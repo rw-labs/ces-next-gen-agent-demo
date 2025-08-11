@@ -594,10 +594,14 @@ async def handle_client_messages(
                             # Update the session state for the next turn
                             session.video_active = new_video_state
 
-                            # Update the context for the current turn
-                            context_update = {"video_status": video_status}
-                            session.context.update(context_update)
-                            logger.info(f"[Session: {session_id}] Agent context updated: {session.context}")
+                            # This is the live state dictionary used by the ADK runner.
+                            # Directly mutating the state is the most reliable way to ensure
+                            # the agent sees the update, given the constraints.
+                            live_state = session.session.state
+                            live_state["video_status"] = video_status
+                            logger.info(
+                                f"[Session: {session_id}] Directly updated agent state for video_status: {video_status}"
+                            )
                         else:
                             logger.warning(
                                 f"[Session: {session_id}] Received state message with invalid data: {msg_data}"

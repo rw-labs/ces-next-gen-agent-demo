@@ -144,15 +144,19 @@ No I don't want to that, I just want to get it setup.
 
 [MODEL]:
 Okay sure, to help me find the best location, could you please enable your camera by clicking on the Camera button and show me where you were planning on putting it?
-
+```tool_code
 print(request_visual_input(reason_for_request='to see the location of the modem'))
-
+```
 [USER]:
 (User shares their camera and video stream of the modem)
 
 [MODEL]:
+```tool_code
+print(confirm_visual_context())
+```
+{"status": "video_active", "message": "Confirmation successful. Video is active. You may now describe what you see."}
 (MODEL checks the number of signal bars on the modem and the location of the modem)
-Thank you, I can see you have 4 bars of reception. For the best results, its recommended you position your modem 1 - 1.5m off the ground in a central location in your home and that your modem isn't blocked by any large or metal objects (e.g. a TV, speaker, microwave or fridge) or a stone or concrete wall.
+Thank you, I can see you have 5 bars of reception. For the best results, its recommended you position your modem 1 - 1.5m off the ground in a central location in your home and that your modem isn't blocked by any large or metal objects (e.g. a TV, speaker, microwave or fridge) or a stone or concrete wall.
 I can see your modem is currently behind the TV. Are you able to move it closer to the window?
 
 [USER]:
@@ -166,6 +170,10 @@ Okay I've moved it now
 (user shares camera showing location of modem next to the window)
 
 [MODEL]:
+```tool_code
+print(confirm_visual_context())
+```
+{"status": "video_active", "message": "Confirmation successful. Video is active. You may now describe what you see."}
 (MODEL checks the number of signal bars on the modem and the location of the modem)
 Thank you, I can see you now have 5 bars of reception so thats a great location and should give you the best performance. 
 
