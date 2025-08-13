@@ -41,9 +41,6 @@ body {
   position: fixed;
   left: 0;
   width: 100vw;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   z-index: 100;
   pointer-events: none; /* Allow clicks to pass through */
 }
@@ -51,7 +48,7 @@ body {
 video {
   max-width: 100%;
   max-height: 100%;
-  width: auto;
+  width: 100%;
   height: auto;
   object-fit: contain;
   background: #000;
@@ -255,11 +252,13 @@ video {
   .video-container {
     top: 80px;
     height: calc(100vh - 200px);
-    padding: 0 20px;
+    padding: 0;
+    max-width: 800px;
+    margin: 0 auto;
   }
 
   video {
-    max-width: 80%;
+    max-width: 100%;
     border-radius: 8px;
   }
 

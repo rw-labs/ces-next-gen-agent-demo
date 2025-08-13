@@ -1,24 +1,24 @@
 from config.config import DEMO_TYPE
 
-from core.agents.dyson.context import DysonContext
-from core.agents.dream11.context import Dream11Context
-from core.agents.telstra.context import TelstraContext
-from core.agents.servicesaus.context import ServicesausContext
-from core.agents.teg.context import TegContext
-from core.agents.xtelcom.context import XtelcomContext
-from core.agents.ollie.context import OllieContext
-from core.agents.tally.context import TallyContext
+# from core.agents.dyson.context import DysonContext
+# from core.agents.dream11.context import Dream11Context
+# from core.agents.telstra.context import TelstraContext
+# from core.agents.servicesaus.context import ServicesausContext
+# from core.agents.teg.context import TegContext
+# from core.agents.xtelcom.context import XtelcomContext
+# from core.agents.ollie.context import OllieContext
+# from core.agents.tally.context import TallyContext
 from core.agents.optus_modem.context import OptusModemContext
 
 
-from core.agents.dyson.dyson_assist import create_dyson_agent
-from core.agents.dream11.dream11_assist import create_dream11_agent
-from core.agents.telstra.telstra_assist import create_telstra_agent
-from core.agents.servicesaus.servicesaus_assist import create_servicesaus_agent
-from core.agents.teg.teg_assist import create_teg_agent
-from core.agents.xtelcom.xtelcom_assist import create_xtelcom_agent
-from core.agents.ollie.ollie_assist import create_ollie_agent
-from core.agents.tally.tally_assist import create_tally_agent
+# from core.agents.dyson.dyson_assist import create_dyson_agent
+# from core.agents.dream11.dream11_assist import create_dream11_agent
+# from core.agents.telstra.telstra_assist import create_telstra_agent
+# from core.agents.servicesaus.servicesaus_assist import create_servicesaus_agent
+# from core.agents.teg.teg_assist import create_teg_agent
+# from core.agents.xtelcom.xtelcom_assist import create_xtelcom_agent
+# from core.agents.ollie.ollie_assist import create_ollie_agent
+# from core.agents.tally.tally_assist import create_tally_agent
 from core.agents.optus_modem.optus_modem_assist import create_optus_modem_agent
 
 from .logger import logger
