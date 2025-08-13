@@ -5,6 +5,15 @@
 - Setup gcloud `gcloud auth login`
 - Setup ADC `gcloud auth application-default login`
 
+## Virtual Env
+```bash
+uv sync
+```
+
+## Optional (Gmail integration)
+
+**NOTE:** The following is only required for gmail integration (Dyson demo)
+
 - Generate a Desktop type client using `Google Auth Platform`. Setup required permission and then download the credential `credentials.json`
 - Generate `gmail_token.json` (must be this filename) by running the following
 ```bash
@@ -16,20 +25,28 @@ uv run secret_manager.py
 - Setup gmail token secret key: `gcloud secrets create gmail-token --data-file=gmail_token.json`
 - Backend cloudrun service account need to have the required permission.
 
-## Virtual Env
-```bash
-uv sync
-```
+
 
 ## Local Run
+
+**NOTE:** To test locally, check the index.html or mobile.html to ensure its pointing to the correct backend:
+
+To connect to local backend: `const api = new GeminiAPI('ws://127.0.0.1:8080/ws')`
+
+
 - `make client-local`
 - `make backend-local`
 - Browse to `http://localhost:8000/index.html`
 
 
 ## Cloud Run
-- `make client-cloudrun-deploy`
+
+**NOTE:** Before deploying the front end to Cloud Run, check the index.html or mobile.html to ensure its pointing to the correct backend:
+
+Use for Cloud Run: `const api = new GeminiAPI('wss://optus-modem-assistant-backend-tm5jum3toa-uc.a.run.app/ws')`
+
 - `make backend-cloudrun-deploy`
+- `make client-cloudrun-deploy`
 - Browse to `https://live-agent-ui-xxx.us-central1.run.app`
 
 
