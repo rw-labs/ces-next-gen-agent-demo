@@ -25,7 +25,7 @@ LOCATION = os.environ.get("VERTEX_LOCATION", "us-central1")
 DEMO_TYPE = os.environ.get("DEMO_TYPE", "optus_modem_setup")
 FIRST_NAME = os.environ.get("FIRST_NAME", "Rod")
 LAST_NAME = os.environ.get("LAST_NAME", "Williams")
-MODEL_NAME = os.environ.get("MODEL", "gemini-live-2.5-flash-preview-native-audio")
+MODEL_NAME = os.environ.get("MODEL", "gemini-live-2.5-flash")
 
 logger.info(f"FIRST_NAME: {FIRST_NAME}")
 logger.info(f"LAST_NAME: {LAST_NAME}")

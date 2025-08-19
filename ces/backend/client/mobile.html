@@ -364,7 +364,7 @@
             }
             const message = '[SYSTEM: Video stream ended]';
             api.sendStateUpdate({ "video_active": false });
-            logSystemMessage(message);
+            // logSystemMessage(message);
         } else {
             if (mediaHandler.isScreenActive) {
                 mediaHandler.stopAll();
@@ -394,7 +394,7 @@
                 mediaHandler.startFrameCapture((base64Image) => api.sendImage(base64Image));
                 const message = '[SYSTEM: Video stream started]';
                 api.sendStateUpdate({ "video_active": true });
-                logSystemMessage(message);
+                // logSystemMessage(message);
             }
         }
     }
@@ -402,14 +402,14 @@
     switchCameraButton.onclick = async () => {
       const endMessage = '[SYSTEM: Video stream ended]';
       api.sendStateUpdate({ "video_active": false });
-      logSystemMessage(endMessage);
+      // logSystemMessage(endMessage);
 
       const success = await mediaHandler.switchCamera();
 
       if (success) {
         const startMessage = '[SYSTEM: Video stream started]';
         api.sendStateUpdate({ "video_active": true });
-        logSystemMessage(startMessage);
+        // logSystemMessage(startMessage);
       }
     };
 
@@ -464,7 +464,7 @@
             mediaHandler.stopAll();
             const message = '[SYSTEM: Video stream ended]';
             api.sendStateUpdate({ "video_active": false });
-            logSystemMessage(message);
+            // logSystemMessage(message);
         }
 
         if (mediaHandler.isScreenActive) {
@@ -482,7 +482,7 @@
             mediaHandler.startFrameCapture((base64Image) => api.sendImage(base64Image));
             const message = '[SYSTEM: Video stream started]';
             api.sendStateUpdate({ "video_active": true });
-            logSystemMessage(message);
+            // logSystemMessage(message);
         }
     });
 
@@ -580,7 +580,7 @@
       const messageElement = document.createElement('p');
       messageElement.className = 'interrupted-message';
       messageElement.textContent = 'Response interrupted by user input';
-      output.appendChild(messageElement);
+      // output.appendChild(messageElement);
       output.scrollTop = output.scrollHeight;
     };
 
