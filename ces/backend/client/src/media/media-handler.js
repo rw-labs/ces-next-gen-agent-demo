@@ -49,50 +49,47 @@ export class MediaHandler {
     }
   }
 
-  async startWebcam(deviceId) {
+  async startWebcam(options = {}) {
     try {
+      const { useFrontCamera = false, deviceId = null } = options;
+      const isMobile = await this.isMobileDevice();
+
       const constraints = {
         video: {
-          width: 1280, 
+          width: 1280,
           height: 720,
-          deviceId: deviceId ? { exact: deviceId } : undefined
         }
       };
-    
+
+      if (isMobile) {
+        constraints.video.facingMode = useFrontCamera ? "user" : "environment";
+      } else if (deviceId) {
+        constraints.video.deviceId = { exact: deviceId };
+      }
+
       const stream = await navigator.mediaDevices.getUserMedia(constraints);
       this.handleNewStream(stream);
       this.isWebcamActive = true;
+      this.usingFrontCamera = isMobile ? useFrontCamera : false;
       return true;
-    
+
     } catch (error) {
       console.error('Error accessing webcam:', error);
+      // Fallback for desktop if specific constraints fail
+      if (! (await this.isMobileDevice())) {
+          try {
+              console.log('Trying webcam with no constraints...');
+              const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+              this.handleNewStream(stream);
+              this.isWebcamActive = true;
+              return true;
+          } catch (fallbackError) {
+              console.error('Fallback webcam access also failed:', fallbackError);
+              return false;
+          }
+      }
       return false;
     }
-  }
-
-  // New function to orchestrate the camera selection
-  async initializeCamera() {
-    const cameras = await this.getCameras();
-    if (cameras.length === 0) {
-      console.error("No cameras found.");
-      return false;
-    }
-
-    let deviceId;
-
-    if (await this.isMobileDevice()) {
-      const rearCamera = cameras.find(device => device.label.toLowerCase().includes('back'));
-      deviceId = rearCamera ? rearCamera.deviceId : cameras[0].deviceId;
-      console.log("Mobile device detected. Attempting to use rear camera.");
-    } else {
-      deviceId = cameras[0].deviceId;
-      console.log("Desktop device detected. Using default camera.");
-    }
-
-    if (deviceId) {
-      return await this.startWebcam(deviceId);
-    }
-    return false;
   }
 
   // async startWebcam(useFrontCamera = false) {
@@ -136,27 +133,39 @@ export class MediaHandler {
 
   async switchCamera() {
     if (!this.isWebcamActive) return false;
+    
+    // On mobile, we can just flip the facing mode.
+    if (await this.isMobileDevice()) {
+        this.stopAll(); // Stop current stream and capture
+        const success = await this.startWebcam({ useFrontCamera: !this.usingFrontCamera });
+        if (success && this.frameCallback) {
+            this.startFrameCapture(this.frameCallback);
+        }
+        return success;
+    } 
+    // For desktop, use device enumeration
+    else {
+        const cameras = await this.getCameras();
+        if (cameras.length < 2) {
+            console.log("Not enough cameras to switch.");
+            return false;
+        }
 
-    const cameras = await this.getCameras();
-    if (cameras.length < 2) {
-      console.log("Not enough cameras to switch.");
-      return false;
+        const currentTrack = this.currentStream.getVideoTracks()[0];
+        const currentDeviceId = currentTrack.getSettings().deviceId;
+
+        const currentCameraIndex = cameras.findIndex(device => device.deviceId === currentDeviceId);
+        const nextCameraIndex = (currentCameraIndex + 1) % cameras.length;
+        const nextCamera = cameras[nextCameraIndex];
+
+        this.stopAll(); // This also stops frame capture
+
+        const success = await this.startWebcam({ deviceId: nextCamera.deviceId });
+        if (success && this.frameCallback) {
+            this.startFrameCapture(this.frameCallback);
+        }
+        return success;
     }
-
-    const currentTrack = this.currentStream.getVideoTracks()[0];
-    const currentDeviceId = currentTrack.getSettings().deviceId;
-
-    const currentCameraIndex = cameras.findIndex(device => device.deviceId === currentDeviceId);
-    const nextCameraIndex = (currentCameraIndex + 1) % cameras.length;
-    const nextCamera = cameras[nextCameraIndex];
-
-    this.stopAll(); // This also stops frame capture
-
-    const success = await this.startWebcam(nextCamera.deviceId);
-    if (success && this.frameCallback) {
-      this.startFrameCapture(this.frameCallback);
-    }
-    return success;
   }
 
   handleNewStream(stream) {

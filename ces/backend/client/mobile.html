@@ -181,8 +181,8 @@
     const audioContext = new (window.AudioContext || window.webkitAudioContext)({ sampleRate: 24000 });
     const audioStreamer = new AudioStreamer(audioContext);
     const mediaHandler = new MediaHandler();
-    const api = new GeminiAPI('ws://127.0.0.1:8080/ws'); //only for local development
-    // const api = new GeminiAPI('wss://optus-modem-assistant-backend-tm5jum3toa-uc.a.run.app/ws'); //Use for Cloud Run
+    // const api = new GeminiAPI('ws://127.0.0.1:8080/ws'); //only for local development
+    const api = new GeminiAPI('wss://optus-modem-assistant-backend-tm5jum3toa-uc.a.run.app/ws'); //Use for Cloud Run
 
     // --- DOM Elements ---
     const connectButton = document.getElementById('connectButton');
@@ -208,16 +208,7 @@
 
     function setupUIForDevice() {
       if (isMobileDevice) {
-        cameraSelector.style.display = 'none'; // Hide the desktop camera selector
-        // Create a dedicated mobile webcam button to avoid conflicts
-        const mobileWebcamButton = document.createElement('button');
-        mobileWebcamButton.id = 'webcamButton-mobile';
-        mobileWebcamButton.className = 'action-button';
-        mobileWebcamButton.disabled = true;
-        mobileWebcamButton.innerHTML = '<span class="material-symbols-outlined">videocam</span>';
-        // Insert it before the (hidden on mobile) switch camera button for layout consistency
-        mediaButtonsContainer.insertBefore(mobileWebcamButton, switchCameraButton);
-        webcamButton = mobileWebcamButton; // Re-assign the global webcamButton to the new mobile one
+        cameraIconButton.style.display = 'none';
       } else {
         switchCameraButton.style.display = 'none'; // Hide the mobile flip camera button
       }
@@ -373,14 +364,14 @@
             
             let success;
             if (isMobileDevice) {
-                success = await mediaHandler.initializeCamera();
+                success = await mediaHandler.startWebcam({ useFrontCamera: false }); // Request rear camera
             } else {
                 const deviceId = cameraSelect.value;
                 if (!deviceId) {
                     alert("Please select a camera first by clicking the icon next to the video button.");
                     return;
                 }
-                success = await mediaHandler.startWebcam(deviceId);
+                success = await mediaHandler.startWebcam({ deviceId: deviceId });
             }
 
             if (success) {
@@ -619,6 +610,7 @@
 
     window.addEventListener('load', adjustLayout);
     window.addEventListener('resize', adjustLayout);
+
 
   </script>
 </body>
