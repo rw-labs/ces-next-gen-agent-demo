@@ -6,7 +6,7 @@
 
 body {
   width: 100vw;
-  height: 100vh;
+  height: 100dvh;
   overflow: hidden;
   background: #000;
   color: white;
@@ -305,7 +305,7 @@ video {
 /* Active state for media buttons */
 .action-button.active {
   background: #00828E;
-  border: 1px solid rgba(255, 0, 0, 0.3);
+  border: none;
 }
 
 .camera-selector {
@@ -350,11 +350,11 @@ video {
 
 
 .action-button.active:hover {
-  background: rgba(255, 0, 0, 0.3);
+  background: #00828E;
 }
 
 .action-button.active:active {
-  background: rgba(255, 0, 0, 0.4);
+  background: #00828E;
 }
 
 .function-info {
