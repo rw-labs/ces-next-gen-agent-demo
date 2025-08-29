@@ -207,7 +207,12 @@
     const audioStreamer = new AudioStreamer(audioContext);
     const mediaHandler = new MediaHandler();
     const api = new GeminiAPI('ws://127.0.0.1:8080/ws'); //only for local development
+    
+    // Backend that uses gemini-live-2.5-flash
     // const api = new GeminiAPI('wss://optus-modem-assistant-backend-tm5jum3toa-uc.a.run.app/ws'); //Use for Cloud Run
+    
+    // Backend that uses gemini-live-2.5-flash-preview-native-audio
+    // const api = new GeminiAPI('https://optus-modem-assistant-backend-v2-292586532901.us-central1.run.app/ws'); //Use for Cloud Run
 
     // --- DOM Elements ---
     const connectButton = document.getElementById('connectButton');
