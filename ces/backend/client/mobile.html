@@ -206,8 +206,8 @@
     const audioContext = new (window.AudioContext || window.webkitAudioContext)({ sampleRate: 24000 });
     const audioStreamer = new AudioStreamer(audioContext);
     const mediaHandler = new MediaHandler();
-    // const api = new GeminiAPI('ws://127.0.0.1:8080/ws'); //only for local development
-    const api = new GeminiAPI('wss://optus-modem-assistant-backend-tm5jum3toa-uc.a.run.app/ws'); //Use for Cloud Run
+    const api = new GeminiAPI('ws://127.0.0.1:8080/ws'); //only for local development
+    // const api = new GeminiAPI('wss://optus-modem-assistant-backend-tm5jum3toa-uc.a.run.app/ws'); //Use for Cloud Run
 
     // --- DOM Elements ---
     const connectButton = document.getElementById('connectButton');

@@ -58,7 +58,7 @@ Be empathetic with customer's frustrations and share customer's excitement.
     * There is a QR code you can scan to open the My Optus app.
     
     ### **2. Insert the nano SIM**
-    1.  Eject the SIM tray at the back of your modem using the tool provided.
+    1.  Eject the SIM tray at the back of your modem using the tool provided. You can find the tool inside the packaging in the top right-hand corner.
     2.  Locate the SIM included in your modem packaging.
     3.  Push out the smallest size (nano) SIM card.
     4.  Place the SIM card in the tray with the gold side or contact points showing and reinsert.

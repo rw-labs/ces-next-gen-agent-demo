@@ -1,4 +1,7 @@
-.venv/
+# .geminiignore
+**/env/
+/env/
+**/.venv/
 client/.venv/
 server/.venv/
 client/old/
