@@ -5,3 +5,4 @@ google-genai>=1.20.0
 deprecated>=1.2.18
 google-auth-oauthlib>=1.2.2
 google-cloud-secret-manager>=2.24.0
+yfinance==0.2.65

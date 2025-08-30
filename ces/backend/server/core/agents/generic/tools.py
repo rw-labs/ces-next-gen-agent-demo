@@ -1,4 +1,5 @@
 # ./server/core/agents/ollie/tools.py
+import sys
 import logging
 import os
 import json
@@ -7,6 +8,7 @@ import re # For parsing prices
 import aiohttp
 from typing import Dict, Any
 from urllib.parse import urlencode
+import yfinance as yf
 
 from google.adk.tools.tool_context import ToolContext
 from .context import GenericContext # Imports LIVE_OPTUS_CATALOG_DATA
@@ -122,7 +124,115 @@ async def get_health_stats(search_query: str) -> Dict[str, Any]:
     except Exception as e:
         logger.error(f"Error getting health stats for {search_query}: {str(e)}")
         return {"error": f"Tool execution failed: {str(e)}"}
+    
+#!/usr/bin/env python
 
+# This script retrieves the current stock price, 52-week high/low, and other
+# company details using the unofficial Yahoo Finance API via the yfinance library.
+#
+# Before running, you must install the yfinance library:
+# pip install yfinance
+
+async def get_stock_price(ticker_symbol: str) -> Dict[str, Any]:
+    """
+    Fetches stock price and 52-week high/low for a given ticker symbol.
+
+    Args:
+        ticker_symbol (str): The stock ticker symbol (e.g., 'AAPL', 'MSFT').
+
+    Returns:
+        dict: A dictionary containing the requested data or an error message.
+    """
+    if not ticker_symbol:
+        return {
+            "status": "error",
+            "message": "Ticker symbol is missing."
+        }
+
+    try:
+        ticker = yf.Ticker(ticker_symbol)
+        info = ticker.info
+
+        company_name = info.get('longName', 'N/A')
+        price = info.get('regularMarketPrice')
+        fifty_two_week_high = info.get('fiftyTwoWeekHigh')
+        fifty_two_week_low = info.get('fiftyTwoWeekLow')
+
+        if price is not None:
+            return {
+                "status": "success",
+                "data": {
+                    "companyName": company_name,
+                    "ticker": ticker_symbol.upper(),
+                    "currentPrice": round(price, 2),
+                    "fiftyTwoWeekHigh": round(fifty_two_week_high, 2) if fifty_two_week_high is not None else "N/A",
+                    "fiftyTwoWeekLow": round(fifty_two_week_low, 2) if fifty_two_week_low is not None else "N/A"
+                }
+            }
+        else:
+            price_fallback = info.get('currentPrice')
+            if price_fallback is not None:
+                 return {
+                    "status": "success",
+                    "data": {
+                        "companyName": company_name,
+                        "ticker": ticker_symbol.upper(),
+                        "currentPrice": round(price_fallback, 2),
+                        "fiftyTwoWeekHigh": round(fifty_two_week_high, 2) if fifty_two_week_high is not None else "N/A",
+                        "fiftyTwoWeekLow": round(fifty_two_week_low, 2) if fifty_two_week_low is not None else "N/A"
+                    }
+                }
+            else:
+                return {
+                    "status": "error",
+                    "message": f"Could not retrieve stock price for '{ticker_symbol.upper()}'. Please check if the ticker symbol is valid."
+                }
+
+    except Exception as e:
+        return {
+            "status": "error",
+            "message": f"An error occurred: {e}. Please ensure the ticker symbol is correct and you have an internet connection."
+        }
+
+def get_company_details(ticker_symbol: str) -> Dict[str, Any]:
+    """
+    Fetches and returns key company details for a given ticker symbol.
+
+    Args:
+        ticker_symbol (str): The stock ticker symbol (e.g., 'AAPL', 'MSFT').
+
+    Returns:
+        dict: A dictionary containing the requested data or an error message.
+    """
+    if not ticker_symbol:
+        return {
+            "status": "error",
+            "message": "Ticker symbol is missing."
+        }
+
+    try:
+        ticker = yf.Ticker(ticker_symbol)
+        info = ticker.info
+
+        return {
+            "status": "success",
+            "data": {
+                "companyName": info.get('longName', 'N/A'),
+                "ticker": ticker_symbol.upper(),
+                "sector": info.get('sector', 'N/A'),
+                "industry": info.get('industry', 'N/A'),
+                "website": info.get('website', 'N/A'),
+                "businessSummary": info.get('longBusinessSummary', 'N/A')
+            }
+        }
+
+    except Exception as e:
+        return {
+            "status": "error",
+            "message": f"An error occurred while fetching company details: {e}. Please ensure the ticker symbol is correct and you have an internet connection."
+        }
+
+ 
 def request_visual_input(reason_for_request: str, tool_context: ToolContext) -> dict:
     logger.info(f"Tool: request_visual_input called. Reason: '{reason_for_request}'")
     return {

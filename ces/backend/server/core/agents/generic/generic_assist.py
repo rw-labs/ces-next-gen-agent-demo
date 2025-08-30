@@ -18,6 +18,8 @@ from .tools import ( # Will import tools from tools.py
     get_weather,
     get_weather_forecast,
     get_health_stats,
+    get_stock_price,
+    get_company_details,
     greeting,
     request_visual_input,
     affirmative,
@@ -54,7 +56,9 @@ def create_generic_agent(
             get_current_datetime_tool,
             get_weather,
             get_weather_forecast,
-            get_health_stats
+            get_health_stats,
+            get_stock_price,
+            get_company_details,
         ]
     
     default_sub_agents = [] # No default sub-agents for Ollie in this design
