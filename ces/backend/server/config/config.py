@@ -22,10 +22,12 @@ load_dotenv()
 
 PROJECT_ID = os.environ.get("PROJECT_ID", "cx-demo-312101")
 LOCATION = os.environ.get("VERTEX_LOCATION", "us-central1")
-DEMO_TYPE = os.environ.get("DEMO_TYPE", "optus_modem_setup")
+DEMO_TYPE = os.environ.get("DEMO_TYPE", "generic")
 FIRST_NAME = os.environ.get("FIRST_NAME", "Rod")
 LAST_NAME = os.environ.get("LAST_NAME", "Williams")
 MODEL_NAME = os.environ.get("MODEL", "gemini-live-2.5-flash")
+ASSISTANT_NAME = os.environ.get("ASSISTANT_NAME", "Gemini Live Assistant")
+BRAND_NAME = os.environ.get("BRAND_NAME", "Google")
 
 logger.info(f"FIRST_NAME: {FIRST_NAME}")
 logger.info(f"LAST_NAME: {LAST_NAME}")

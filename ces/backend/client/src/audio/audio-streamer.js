@@ -155,6 +155,7 @@ export class AudioStreamer {
       }
       if (this.currentSource) {
         try {
+          this.currentSource.onended = null;
           this.currentSource.stop();
           this.currentSource.disconnect();
         } catch (e) {
@@ -162,14 +163,10 @@ export class AudioStreamer {
         }
       }
       this.audioQueue = [];
-      this.bufferedTime = 0; // reset buffered time
-      this.gainNode.gain.linearRampToValueAtTime(0, this.context.currentTime + 0.1);
-
-      setTimeout(() => {
-        this.gainNode.disconnect();
-        this.gainNode = this.context.createGain();
-        this.gainNode.connect(this.context.destination);
-      }, 200);
+      this.bufferedTime = 0;
+      this.gainNode.disconnect();
+      this.gainNode = this.context.createGain();
+      this.gainNode.connect(this.context.destination);
     }
 
     async resume() {

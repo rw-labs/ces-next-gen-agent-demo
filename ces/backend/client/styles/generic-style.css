@@ -1,0 +1,472 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100vw;
+  height: 100dvh;
+  overflow: hidden;
+  background: #000;
+  color: white;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+video {
+  max-width: 100%;
+  max-height: 100%;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  background: #000;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  pointer-events: auto; /* Make video itself clickable */
+}
+
+.chat-output p {
+  padding: 10px;
+  border-radius: 15px;
+  word-wrap: break-word;
+}
+
+.user-message {
+  background: #0084ff;
+  align-self: flex-end;
+}
+
+.gemini-message {
+  background: #333;
+  align-self: flex-start;
+}
+
+.info-text {
+  text-align: center;
+  padding: 0 20px;
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: white;
+}
+
+.error-message {
+  /* background: rgba(255, 68, 68, 0.9); */
+  align-self: center;
+  margin: 10px 15%;
+  text-align: center;
+  padding: 12px 20px;
+  border-radius: 20px;
+  font-weight: 500;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.connection-error {
+  background: rgba(255, 68, 68, 0.95);
+  position: fixed;
+  top: 200px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2000;
+  padding: 15px 25px;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  max-width: 90%;
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideDown {
+  from { 
+    transform: translate(-50%, -20px);
+    opacity: 0;
+  }
+  to { 
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
+}
+
+.centered-button-container {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+}
+
+.media-buttons-container {
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Align items vertically */
+  gap: 20px;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+}
+
+.camera-selector {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Spacing between camera icon and dropdown */
+}
+
+.media-buttons-container.hidden {
+  display: none;
+}
+
+.action-button {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.action-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.action-button:active {
+  transform: scale(0.95);
+}
+
+.material-symbols-outlined {
+  font-size: 24px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* Style for connect and stop buttons */
+#connectButton, #stopButton {
+  width: 70px;
+  height: 70px;
+  background:   #4689DD;
+}
+
+#connectButton:not(:disabled):hover,
+#stopButton:not(:disabled):hover {
+  background: rgba(0, 128, 255, 0.3);
+}
+
+#connectButton:not(:disabled):active,
+#stopButton:not(:disabled):active {
+  background: rgba(0, 128, 255, 0.4);
+}
+
+@supports (padding: max(0px)) {
+  .header-section {
+    padding-top: max(15px, env(safe-area-inset-top));
+    padding-left: max(15px, env(safe-area-inset-left));
+    padding-right: max(15px, env(safe-area-inset-right));
+  }
+
+  .controls {
+    padding-bottom: max(20px, env(safe-area-inset-bottom));
+    padding-left: max(15px, env(safe-area-inset-left));
+    padding-right: max(15px, env(safe-area-inset-right));
+  }
+}
+
+@media (hover: hover) {
+  .action-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
+  }
+
+  .action-button:active {
+    transform: scale(0.95);
+  }
+}
+
+/* Active state for media buttons */
+.action-button.active {
+  background:   #4689DD;
+  border: none;
+}
+
+.camera-selector {
+  position: relative;
+}
+
+.camera-dropdown {
+  position: absolute;
+  bottom: 120%; /* Position above the button */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1100;
+  background-color: #2c2c2e;
+  border-radius: 10px;
+  padding: 5px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  width: 250px;
+}
+
+.camera-dropdown select {
+  width: 100%;
+  background: transparent;
+  color: white;
+  border: none;
+  padding: 5px;
+  font-size: 1rem;
+}
+
+.camera-dropdown select:focus {
+  outline: none;
+}
+
+.camera-dropdown select option {
+  padding: 10px;
+  background: #2c2c2e;
+  border: none; /* Remove border on options */
+}
+
+.camera-dropdown select option:hover {
+  background-color:   #4689DD;
+}
+
+
+.action-button.active:hover {
+  background:   #4689DD;
+}
+
+.action-button.active:active {
+  background:   #4689DD;
+}
+
+.function-info {
+  position: fixed;
+  top: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  width: 60%;
+  max-width: 1200px;
+  background-color: #1a1a1a;
+  color: white;
+  padding: 15px;
+  border-radius: 10px;
+  font-family: monospace;
+  white-space: pre-wrap;
+  word-break: break-all;
+  backdrop-filter: blur(10px);
+  margin-top: 20px;
+  text-align: left;
+  font-size: 0.85rem;
+}
+
+@media (min-width: 768px) {
+  .function-info {
+    padding: 20px;
+    font-size: 0.9rem;
+  }
+}
+
+.system-message {
+  text-align: center;
+  color: #aaa; /* A dimmer color for system messages */
+  padding: 4px 8px;
+  font-size: 0.8rem;
+  font-style: italic;
+}
+
+.interrupted-message {
+  color: white;
+  font-style: italic;
+  padding: 4px 8px;
+  font-size: 0.8rem;
+}
+
+.function-name {
+  color: #a5d6ff;
+  font-weight: bold;
+}
+.function-params {
+  color: #e0e0e0;
+  white-space: pre-wrap;
+}
+.api-response {
+  color: #b2f2bb;
+  white-space: pre-wrap;
+}
+
+/* === LAYOUT STYLES (MOVED FROM HTML) === */
+/* These styles use .desktop-device and .mobile-device classes */
+
+    /* DESKTOP STYLES */
+    .desktop-device body {
+      background-color: #000;
+      margin: 0;
+      color: white;
+      font-family: system-ui, -apple-system, sans-serif;
+      overflow: hidden;
+    }
+
+    .desktop-device .mobile-outline {
+      width: 100vw;
+      height: 100dvh;
+      background-color: transparent;
+      border: none;
+      border-radius: 0;
+      box-shadow: none;
+      display: block;
+    }
+
+    .desktop-device .mobile-screen {
+      width: 100%;
+      height: 100%;
+      background-color: black;
+      border-radius: 0;
+      position: static;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      padding: 1rem;
+      box-sizing: border-box;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .desktop-device .header-section {
+      position: static;
+      padding: 0;
+      text-align: center;
+      z-index: auto;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    .desktop-device .header-section h2 { margin-top: 0; }
+    .desktop-device .info-text { text-align: center; padding: 0; margin-top: 0; font-size: 1.1rem; }
+    .desktop-device .center-image { height: 40px; }
+
+    .desktop-device #functionInfo {
+      display: none !important;
+    }
+
+    .desktop-device .video-container {
+      position: relative;
+      height: 0;
+      transition: height 0.4s ease-in-out;
+      flex-shrink: 0;
+      background: #1c1c1e;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .desktop-device.video-active .video-container {
+      height: 50%;
+    }
+
+    .desktop-device #videoPreview {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .desktop-device .chat-output {
+      position: static;
+      overflow-y: auto;
+      height: auto;
+      flex-grow: 1;
+      background: #1c1c1e;
+      border-radius: 8px;
+      padding: 1rem;
+      z-index: auto;
+    }
+
+    .desktop-device .controls {
+      position: static;
+      z-index: auto;
+      flex-shrink: 0;
+    }
+
+    /* MOBILE STYLES (unchanged) */
+    .mobile-device .mobile-outline {
+        width: 100%;
+        height: 100dvh;
+        background-color: black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .mobile-device .mobile-screen {
+        border-radius: 0px;
+    }
+
+    .mobile-screen {
+      width: 100%;
+      height: 100%;
+      background-color: black;
+      border-radius: 25px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header-section {
+      position: relative;
+      z-index: 10;
+      padding: 20px;
+      color: white;
+      text-align: center;
+    }
+
+    .header-section h2 {
+        margin-top: 10px;
+    }
+
+    .video-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 2; /* Above chat */
+    }
+
+    .chat-output {
+        overflow-y: auto;
+        padding: 10px;
+        z-index: 1; /* Behind video */
+        position: absolute;
+        min-height: 0;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .controls {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 10;
+    }
+
+    #videoPreview {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
