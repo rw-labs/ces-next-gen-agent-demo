@@ -1,0 +1,33 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '--no-cache', '-t', 'gcr.io/$PROJECT_ID/google-ces-nextgen-backend', '.']
+  dir: 'server'
+
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'gcr.io/$PROJECT_ID/google-ces-nextgen-backend']
+
+- name: 'gcr.io/cloud-builders/gcloud'
+  args:
+  - 'run'
+  - 'deploy'
+  - 'google-ces-nextgen-backend'
+  - '--image'
+  - 'gcr.io/$PROJECT_ID/google-ces-nextgen-backend'
+  - '--region'
+  - 'us-central1'
+  - '--platform'
+  - 'managed'
+  - '--min'
+  - '1'
+  - '--allow-unauthenticated'
+  - '--port'
+  - '8080'
+  - '--port'
+  - '80'
+  # You need to use the --update-env-vars or --remove-env-vars to change
+  # - '--set-env-vars'
+  # - 'PROJECT_ID=${PROJECT_ID},LOG_LEVEL=INFO,USE_TTS=false,TTS_LOCATION=global'
+  - '--service-account'
+  - 'cloudrun-multimodal-live@${PROJECT_ID}.iam.gserviceaccount.com'
+images:
+- 'gcr.io/$PROJECT_ID/google-ces-nextgen-backend'

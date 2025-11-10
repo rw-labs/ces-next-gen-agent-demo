@@ -17,11 +17,13 @@ backend-local:
 	(cd "ces/backend/server/" && uv run combined_server.py)
 
 client-cloudrun-deploy:
-	(cd ces/backend && gcloud builds submit --config client/cloudbuild.yaml)
+	(cd ces/backend && gcloud builds submit --config client/cloudbuild-generic.yaml)
+# 	(cd ces/backend && gcloud builds submit --config client/cloudbuild.yaml)
 # 	(cd ces/backend && gcloud builds submit --config client/cloudbuild-v2.yaml)
 
 
 backend-cloudrun-deploy:
-	(cd ces/backend && gcloud builds submit --config server/cloudbuild_optus_modem.yaml)
+	(cd ces/backend && gcloud builds submit --config server/cloudbuild_generic.yaml)
+# 	(cd ces/backend && gcloud builds submit --config server/cloudbuild_optus_modem.yaml)
 # 	(cd ces/backend && gcloud builds submit --config server/cloudbuild_optus_modem-v2.yaml)
 

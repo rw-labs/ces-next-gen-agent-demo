@@ -4,7 +4,9 @@ FROM nginx:alpine
 RUN mkdir -p /usr/share/nginx/html
 
 # Copy mobile.html as index.html
-COPY mobile.html /usr/share/nginx/html/index.html
+COPY generic-index.html /usr/share/nginx/html/index.html
+
+# COPY optus-mobile.html /usr/share/nginx/html/index.html
 # COPY index_tally.html /usr/share/nginx/html/index.html
 # COPY tally-home.html /usr/share/nginx/html/tally-home.html
 

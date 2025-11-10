@@ -1,0 +1,37 @@
+steps:
+# Build the container image
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'gcr.io/$PROJECT_ID/google-ces-nextgen-ui', '.']
+  dir: 'client'
+
+# Push the container image to Container Registry
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'gcr.io/$PROJECT_ID/google-ces-nextgen-ui']
+
+# Deploy container image to Cloud Run
+- name: 'gcr.io/cloud-builders/gcloud'
+  args:
+  - 'run'
+  - 'deploy'
+  - 'google-ces-nextgen-ui'
+  - '--image'
+  - 'gcr.io/$PROJECT_ID/google-ces-nextgen-ui'
+  - '--region'
+  - 'us-central1'
+  - '--platform'
+  - 'managed'
+  - '--min'
+  - '1'
+  - '--allow-unauthenticated'
+  - '--port'
+  - '8080'
+  - '--set-env-vars'
+  #- 'BACKEND_URL=https://live-agent-backend-combined-bvflrcv5rq-uc.a.run.app'
+  - 'BACKEND_URL=${_BACKEND_URL}'
+
+images:
+- 'gcr.io/$PROJECT_ID/google-ces-nextgen-ui'
+# NOTE: Substitution does not work. 
+# Need to modify "const api" variable in mobile.html (or index.html)
+substitutions:
+  _BACKEND_URL: 'wss://https://google-ces-nextgen-backend-292586532901.us-central1.run.app/ws' # Placeholder to remind users to set it
